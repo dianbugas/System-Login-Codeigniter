@@ -19,7 +19,14 @@ class Auth extends CI_Controller
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/login');
             $this->load->view('templates/auth_footer');
+        } else {
+            $this->_login();
         }
+    }
+
+    private function _login()
+    {
+        $email = $this->input->post('email');
     }
 
     public function registration()
