@@ -27,6 +27,13 @@ class Auth extends CI_Controller
     private function _login()
     {
         $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        //ambil data user dari data base
+        $user = $this->db->get_where('user', ['email' => $email])->row_array(); //row_array(untuk mendapatkan 1 baris);
+
+        if($user){
+            //jika user nya ada maka
+        }
     }
 
     public function registration()
