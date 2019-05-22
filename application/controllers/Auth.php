@@ -30,9 +30,18 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
         //ambil data user dari data base
         $user = $this->db->get_where('user', ['email' => $email])->row_array(); //row_array(untuk mendapatkan 1 baris);
-
-        if($user){
-            //jika user nya ada maka
+        //jika user ada
+        if ($user) {
+            //jika user aktif
+            if($user['is_active'] == 1){
+                
+            }else{
+                
+            }
+        } else {
+            //pop untuk pesan user belum register
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered!</div>');
+            redirect('auth');
         }
     }
 
