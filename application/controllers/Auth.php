@@ -33,10 +33,11 @@ class Auth extends CI_Controller
         //jika user ada
         if ($user) {
             //jika user aktif
-            if($user['is_active'] == 1){
-                
-            }else{
-                
+            if ($user['is_active'] == 1) {
+
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This Email has not been activated!</div>');
+                redirect('auth');
             }
         } else {
             //pop untuk pesan user belum register
