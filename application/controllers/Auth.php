@@ -34,7 +34,17 @@ class Auth extends CI_Controller
         if ($user) {
             //jika user aktif
             if ($user['is_active'] == 1) {
+                //cek password
+                if (password_verify($password, $user['password'])) {
+                    $data = [
+                        'email' = $user['email'],
+                        'role_id' = $user['role_id']
+                    ];
 
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
+                    redirect('auth');
+                }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This Email has not been activated!</div>');
                 redirect('auth');
