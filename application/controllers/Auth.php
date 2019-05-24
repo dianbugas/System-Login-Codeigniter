@@ -37,10 +37,12 @@ class Auth extends CI_Controller
                 //cek password
                 if (password_verify($password, $user['password'])) {
                     $data = [
-                        'email' = $user['email'],
-                        'role_id' = $user['role_id']
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id']
                     ];
 
+                    $this->session->set_userdata($data);
+                    redirect('user');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
                     redirect('auth');
@@ -88,5 +90,12 @@ class Auth extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Congratulation! your accunt has been created. Please Login</div>');
             redirect('auth');
         }
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been loggod out!</div>');
+        redirect('auth');
     }
 }
