@@ -42,8 +42,8 @@ class Auth extends CI_Controller
                     ];
 
                     $this->session->set_userdata($data); //disimpan ke dalam ssession data
-                    //cek apakah login user atau admin
-                    if ($user['role_id'] == 1) {
+                    //cek apakah login user atau admin (cek role_id admin atau user)
+                    if ($user['role_id'] == 1) { // mengambild ata dari baris 32
                         redirect('admin');
                     } else {
                         redirect('user'); //arahkan ke controller user   
