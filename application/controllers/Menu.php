@@ -33,7 +33,7 @@ class Menu extends CI_Controller
                                         $this->load->model('Menu_model', 'menu');
                                         //query submenu
                                         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-                                        $data['subMenu'] = $this->menu->getSubMenu;
+                                        $data['subMenu'] = $this->menu->getSubMenu();
 
                                         $this->load->view('templates/header', $data);
                                         $this->load->view('templates/sidebar', $data);
