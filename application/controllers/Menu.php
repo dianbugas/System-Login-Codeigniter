@@ -20,8 +20,25 @@ class Menu extends CI_Controller
                                         } else {
                                                             //insert ke tabel menu(tambah) dan di ambil dari inputan
                                                             $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
-                                                            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
-                                                            redirect('auth');
+                                                            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New menu added!</div>');
+                                                            redirect('menu');
                                         }
+                    }
+
+                    public function submenu()
+                    {
+                                        $data['title'] = 'Submenu Management';
+                                        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+                                        // load submenu yg di bawah
+                                        $this->load->model('Menu_model', 'menu');
+                                        //query submenu
+                                        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+                                        $data['subMenu'] = $this->menu->getSubMenu;
+
+                                        $this->load->view('templates/header', $data);
+                                        $this->load->view('templates/sidebar', $data);
+                                        $this->load->view('templates/topbar', $data);
+                                        $this->load->view('menu/submenu', $data);
+                                        $this->load->view('templates/footer');
                     }
 }
