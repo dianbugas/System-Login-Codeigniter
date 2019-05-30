@@ -9,6 +9,6 @@ class Menu_model extends CI_Model
                   FROM `user_sub_menu` JOIN `user_menu`
                   ON `user_sub_menu`.`menu_id` = `user_menu`.`id`
                 ";
-        return $this->db->query($query)->result_array();
+        return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
 }
