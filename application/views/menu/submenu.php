@@ -4,7 +4,11 @@
 <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
   <div class="row">
     <div class="col-lg">
-      <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+      <!-- untuk menampilkan erorr -->
+      <?php if (validation_errors()) : ?>
+        <div class="alert alert-danger" role="alert"></div>
+          <?= validation_errors(); ?>
+      <?php endif; ?>
       <?= $this->session->flashdata('message'); ?>
       <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
     <table class="table table-hover">
@@ -59,8 +63,8 @@
           <div class="form-group">
             <input type="text" class="form-control" id="title" name="title" placeholder="Submenu Title">
           </div>
-            <div class="form-control">
-              <select class="form-control" name="menu_id" id="menu_id">
+            <div class="form-group  ">
+              <select name="menu_id" id="menu_id" class="form-control">
                 <option value="">Select Menu</option>
                   <?php foreach ($menu as $m) : ?>
                 <option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
@@ -75,8 +79,8 @@
             </div>
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active">
-                <label class="form-check-label" for="active">
+                <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>
+                <label class="form-check-label" for="is_active">
                   Active?
                 </label>
               </div>

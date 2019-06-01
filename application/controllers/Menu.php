@@ -36,10 +36,26 @@ class Menu extends CI_Controller
                                         $data['subMenu'] = $this->menu->getSubMenu();
                                         $data['menu'] = $this->db->get('user_menu')->result_array();
 
-                                        $this->load->view('templates/header', $data);
-                                        $this->load->view('templates/sidebar', $data);
-                                        $this->load->view('templates/topbar', $data);
-                                        $this->load->view('menu/submenu', $data);
-                                        $this->load->view('templates/footer');
+                                        $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
+                                        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
+                                        $this->form_validation->set_rules('url', 'URL', 'required');
+                                        $this->form_validation->set_rules('icon', 'Icon', 'required');
+
+                                        if ($this->form_validation->run() == false) {
+                                                            $this->load->view('templates/header', $data);
+                                                            $this->load->view('templates/sidebar', $data);
+                                                            $this->load->view('templates/topbar', $data);
+                                                            $this->load->view('menu/submenu', $data);
+                                                            $this->load->view('templates/footer');
+                                        } else {
+                                                            $data = [
+                                                                                'title' => $this->input->post('title'),
+                                                                                'menu_id' => $this->input->post('menu_id'),
+                                                                                'url' => $this->input->post('url'),
+                                                                                'icon' => $this->input->post('icon'),
+                                                                                'is_active' => $this->input->post('is_active'),
+
+                                                            ]
+                                        }
                     }
 }
