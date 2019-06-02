@@ -1,6 +1,6 @@
 <?php
 
-public function is_logged_in()
+function is_logged_in()
 {
                     $ci = get_instance();
                     if (!$ci->session->userdata('email')) {
@@ -18,5 +18,8 @@ public function is_logged_in()
                                                             'role_id' => $role_id,
                                                             'menu_id' => $menu_id
                                         ]);
+                                        if ($userAccess->num_rows() < 1) {
+                                                            redirect('auth/blocked');
+                                        }
                     }
 }
