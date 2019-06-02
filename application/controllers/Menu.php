@@ -3,6 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Menu extends CI_Controller
 {
+                    public function __construct()
+                    {
+                                        parent::__construct();
+                                        // di tendang supaya user sembarangan tdk masuk sembarangan lewat url
+                                        is_logged_in();
+                    }
+
                     public function index()
                     {
                                         $data['title'] = 'Menu Management';
@@ -53,9 +60,13 @@ class Menu extends CI_Controller
                                                                                 'menu_id' => $this->input->post('menu_id'),
                                                                                 'url' => $this->input->post('url'),
                                                                                 'icon' => $this->input->post('icon'),
-                                                                                'is_active' => $this->input->post('is_active'),
-
-                                                            ]
+                                                                                'is_active' => $this->input->post('is_active')
+                                                            ];
+                                                            $this->db->insert('user_sub_menu', $data);
+                                                            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Sub menu added!</div>');
+                                                            redirect('menu/submenu');
                                         }
                     }
 }
+
+//tinggal nambah fitur edit dan delet
