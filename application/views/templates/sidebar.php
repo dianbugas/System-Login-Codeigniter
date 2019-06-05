@@ -57,7 +57,7 @@
             </li>
             <?php endforeach; ?>
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider mt-3">
       <?php endforeach; ?>
 
         <!-- Nav Item - Profile -->

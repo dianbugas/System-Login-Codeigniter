@@ -1,5 +1,5 @@
 <?php
-
+//HELPER SENDIRI 
 function is_logged_in()
 {
                     $ci = get_instance();
