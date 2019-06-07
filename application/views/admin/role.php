@@ -23,6 +23,7 @@
       <th scope="row"><?= $i++; ?></th>
       <td><?= $r['role']; ?></td>
       <td>
+      <a href="<?= base_url ?>" class="badge badge-warning">access</a>  
       <a href="#" class="badge badge-success">Edit</a>
       <a href="#" class="badge badge-danger">delete</a>
       </td>
