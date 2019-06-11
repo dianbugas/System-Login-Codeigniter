@@ -31,7 +31,7 @@ class Menu extends CI_Controller
                                                             redirect('menu');
                                         }
                     }
-
+                    // tambah data
                     public function submenu()
                     {
                                         $data['title'] = 'Submenu Management';
@@ -66,6 +66,12 @@ class Menu extends CI_Controller
                                                             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Sub menu added!</div>');
                                                             redirect('menu/submenu');
                                         }
+                    }
+
+                    public function hapus($id)
+                    {
+                                        $this->Menu_model->hapusDataMenu($id);
+                                        redirect('menu');
                     }
 }
 

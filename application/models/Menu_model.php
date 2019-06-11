@@ -11,4 +11,9 @@ class Menu_model extends CI_Model
                 ";
         return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
+
+    public function hapusDataMenu($id)
+    {
+        $this->db->delete('menu', ['id' => $id]);
+    }
 }
