@@ -1,0 +1,9 @@
+{
+	"editor.fontSize": 23,
+	"files.autoSave": "afterDelay",
+	"editor.wordWrapColumn": 100,
+	"editor.formatOnType": true,
+	"terminal.integrated.fontSize": 21,
+	"editor.fontFamily": "'Droid Sans Mono', 'monospace',  'Droid Sans Fallback'",
+	"explorer.openEditors.visible": 21
+}
