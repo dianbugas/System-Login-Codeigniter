@@ -23,7 +23,8 @@
       <th scope="row"><?= $i++; ?></th>
       <td><?= $r['role']; ?></td>
       <td>
-      <a href="<?= base_url ?>" class="badge badge-warning">access</a>  
+        <!-- kita ke method role access dan sambil mengirimkan id -->
+      <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning">access</a>  
       <a href="#" class="badge badge-success">Edit</a>
       <a href="#" class="badge badge-danger">delete</a>
       </td>
@@ -49,11 +50,11 @@
       </div>
       <!-- method="post" ketika input tidak terlihat di url -->
       <!-- action untuk mengarakan controller role -->
-      <form action="<?= base_url('role'); ?>" method="post"> 
+      <form action="<?= base_url('admin/role'); ?>" method="post"> 
       <div class="modal-body">
-      <div class="form-group">
-    <input type="text" class="form-control" id="role" name="role" placeholder="Role name">
-  </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="role" name="role" placeholder="Role name">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

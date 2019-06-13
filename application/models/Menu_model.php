@@ -1,7 +1,7 @@
 <?php 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Menu_model extends CI_Model
+class menu_model extends CI_Model
 {
     public function getSubMenu()
     {
@@ -12,8 +12,14 @@ class Menu_model extends CI_Model
         return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
 
+    public function hapusDataMenuById($id)
+    {
+        return $this->db->get_where('menu', ['id' => $id])->row_array();
+    }
+
     public function hapusDataMenu($id)
     {
-        $this->db->delete('menu', ['id' => $id]);
+        $this->db->where('id', $id);
+        $this->db->delete('menu');
     }
 }
