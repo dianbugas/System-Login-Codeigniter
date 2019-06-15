@@ -40,10 +40,31 @@ class User extends CI_Controller
             $email = $this->input->post('email');
 
             //cek jika ada gambar yang akan  diupload
-            $upload_image = $_FILES['image'], ['name'];
+            $upload_image = $_FILES['image']['name'];
 
-            if($upload_image){
-                
+            if ($upload_image) {
+                $config['upload_path'] = './assets/img/profile/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = '2048';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('image')) {
+                    //cek gambar lama ngambil dari variabel data
+                    $old_image = $data['user']['image'];
+                    //cek gambar defaul bukan
+                    if ($old_image != 'default.jpg') {
+                        //ganti gambar baru
+                        unlink(FCPATH . 'assets/img/profile/' . $old_image);
+                    }
+
+                    // berisi nama file baru yg mau di masukan di baris ke 70. klu ada gambarnya maka bertambah
+                    $new_image = $this->upload->data('file_name');
+                    //klu ga ada gambar maka perintah ini tdk akan di set
+                    $this->db->set('image', $new_image);
+                } else {
+                    echo $this->upload->display_errors();
+                };
             }
 
             $this->db->set('name', $name);

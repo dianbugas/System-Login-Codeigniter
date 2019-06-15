@@ -6,12 +6,12 @@
 
           <!-- tombol flasdata erorr or succes -->
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
               <?= $this->session->flashdata('message'); ?>
             </div>
           </div>
 
-          <div class="card mb-3" style="max-width: 540px;">
+          <div class="card mb-3 col-lg-8">
             <div class="row no-gutters">
               <div class="col-md-4">
                 <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" class="card-img" alt="...">
