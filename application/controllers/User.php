@@ -92,19 +92,22 @@ class User extends CI_Controller
             $this->load->view('user/changepassword', $data);
             $this->load->view('templates/footer');
         } else {
-            //cek password apakah sama yg dinput dgn data di dlam data base. dan tanggapak dulu paassword lama yg di input 
+            //ambil data inputan password lama
             $current_password = $this->input->post('current_password');
+            //ambil data yg di baru di input
             $new_password = $this->input->post('new_password1');
             if (!password_verify($current_password, $data['user']['password'])) {
+                //cek password apakah sama yg dinput dgn data di dlam data base.  klu tdk tampilkan berikut
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
                 redirect('user/changepassword');
             } else {
+                //cek apakah password lama sama dgn inputan password baru
                 if ($current_password == $new_password) {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
                     redirect('user/changepassword');
                 } else {
                     //jika beda maka bener /sudah oke
-                    // password sudah ok
+                    // password sudah ok dan dan lebih dari 3 digit
                     $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
                     $this->db->set('password', $password_hash);
