@@ -121,6 +121,7 @@ class Auth extends CI_Controller
         ];
 
         $this->load->library('email', $config);
+        $this->email->initialize($config);  //tambahkan baris ini
 
         $this->email->from('ardiansyahbugas@gmail.com', 'Matla');
         $this->email->to('dianbugas@gmail.com');
