@@ -11,7 +11,7 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        if($this->session->userdata('email')) {
+        if ($this->session->userdata('email')) {
             redirect('user');
         }
 
@@ -69,7 +69,7 @@ class Auth extends CI_Controller
 
     public function registration()
     {
-        if($this->session->userdata('email')) {
+        if ($this->session->userdata('email')) {
             redirect('user');
         }
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
@@ -94,15 +94,46 @@ class Auth extends CI_Controller
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
-                'is_active' => 1,
+                'is_active' => 0,
                 'date_created' => time()
             ];
 
-            $this->db->insert('user', $data);
+            //$this->db->insert('user', $data);
+
+            $this->_sendEmail();
+
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Congratulation! your accunt has been created. Please Login</div>');
             redirect('auth');
         }
     }
+
+    private function _sendEmail()
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'ardiansyahbugas@gmail.com',
+            'smtp_pass' => '200616ynf',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+
+        $this->email->from('ardiansyahbugas@gmail.com', 'Matla');
+        $this->email->to('dianbugas@gmail.com');
+        $this->email->subject('test');
+        $this->email->message('hello bro');
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
+    }
+
     public function logout()
     {
         $this->session->unset_userdata('email');
