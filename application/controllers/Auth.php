@@ -88,26 +88,34 @@ class Auth extends CI_Controller
             $this->load->view('auth/registration');
             $this->load->view('templates/auth_footer');
         } else {
+            $email = $this->input->post('email', true);
             $data = [
                 'name' => htmlspecialchars($this->input->post('name', true)),
-                'email' => htmlspecialchars($this->input->post('email', true)),
+                'email' => htmlspecialchars($email),
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 0,
                 'date_created' => time()
             ];
+            // siapkan token 
+            $token = base64_encode(random_bytes(32));
+            $user_token = [
+                'email' => $email, //mengambil data dari 91
+                'token' => $token,
+                'date_created' => time()
+            ];
+            $this->db->insert('user', $data);
+            $this->db->insert('user_token', $user_token);
 
-            //$this->db->insert('user', $data);
-
-            $this->_sendEmail();
+            $this->_sendEmail($token, 'verify');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Congratulation! your accunt has been created. Please Login</div>');
             redirect('auth');
         }
     }
 
-    private function _sendEmail()
+    private function _sendEmail($token, $type)
     {
         $config = [
             'protocol' => 'smtp',
@@ -124,9 +132,11 @@ class Auth extends CI_Controller
         $this->email->initialize($config);  //tambahkan baris ini
 
         $this->email->from('ardiansyahbugas@gmail.com', 'Matla');
-        $this->email->to('dianbugas@gmail.com');
-        $this->email->subject('test');
-        $this->email->message('hello bro');
+        $this->email->to($this->input->post('email'));
+        $this->email->subject('Account Verification');
+        $this->email->message('
+            menit 21.06
+        ');
         if ($this->email->send()) {
             return true;
         } else {
