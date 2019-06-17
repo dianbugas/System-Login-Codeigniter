@@ -114,7 +114,7 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
-
+    // fungsi type nya ada dua... apakah untuk aktivasi atau forgot password
     private function _sendEmail($token, $type)
     {
         $config = [
@@ -133,10 +133,12 @@ class Auth extends CI_Controller
 
         $this->email->from('ardiansyahbugas@gmail.com', 'Matla');
         $this->email->to($this->input->post('email'));
-        $this->email->subject('Account Verification');
-        $this->email->message('
-            menit 21.06
-        ');
+        if ($type == 'verify') {
+            $this->email->subject('Account Verification');
+            //cara baca nya : base_url(). di gabung ke controller auth and method verify ... setiap = berarti di gabung
+            $this->email->message('Klik tautan ini untuk memverifikasi akun Anda : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Aktivasi</a>');
+        }
+
         if ($this->email->send()) {
             return true;
         } else {
@@ -158,3 +160,4 @@ class Auth extends CI_Controller
         $this->load->view('auth/blocked');
     }
 }
+//lanjut vidio 24.06
