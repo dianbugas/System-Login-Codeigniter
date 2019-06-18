@@ -100,11 +100,13 @@ class Auth extends CI_Controller
             ];
             // siapkan token 
             $token = base64_encode(random_bytes(32));
+            //mengambil data dari 91        
             $user_token = [
-                'email' => $email, //mengambil data dari 91
+                'email' => $email,
                 'token' => $token,
                 'date_created' => time()
             ];
+
             $this->db->insert('user', $data);
             $this->db->insert('user_token', $user_token);
 
@@ -147,6 +149,26 @@ class Auth extends CI_Controller
         }
     }
 
+    public function verify()
+    {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+        //ambil sebaris saja
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        if ($user) {
+            $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+            if ($user_token) {
+
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Account activation failed! Wrong token.</div>');
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Account activation failed! Wrong email.</div>');
+            redirect('auth');
+        }
+    }
+
     public function logout()
     {
         $this->session->unset_userdata('email');
@@ -160,4 +182,3 @@ class Auth extends CI_Controller
         $this->load->view('auth/blocked');
     }
 }
-//lanjut vidio 24.06
