@@ -112,7 +112,7 @@ class Auth extends CI_Controller
 
             $this->_sendEmail($token, 'verify');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Congratulation! your accunt has been created. Please Login</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Congratulation! your accunt has been created. Please actived your acoount</div>');
             redirect('auth');
         }
     }
@@ -155,16 +155,37 @@ class Auth extends CI_Controller
         $token = $this->input->get('token');
         //ambil sebaris saja
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        //cek email
         if ($user) {
             $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+            //cek token
             if ($user_token) {
+                //cek batas waktu sampai 24 jam
+                if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                    //klu bener. maka di update dgn menggunakan query builder
+                    $this->db->set('is_active', 1);
+                    $this->db->where('email', $email);
+                    $this->db->update('user');
 
+                    // ketika perintah di atas success maka di hapus tokennya
+                    $this->db->delete('user_token', ['email' => $email]);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' has been actived! Please login.</div>');
+                    redirect('auth');
+
+                } else {
+                    //kita hapus dulu data di dalam databse karena habis waktu untuk aktivasi
+                    $this->db->delete('user', ['email' => $email]);
+                    $this->db->delete('user_token', ['email' => $email]);
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Token expired.</div>');
+                    redirect('auth');
+                }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Account activation failed! Wrong token.</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Wrong token.</div>');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Account activation failed! Wrong email.</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Wrong email.</div>');
             redirect('auth');
         }
     }
