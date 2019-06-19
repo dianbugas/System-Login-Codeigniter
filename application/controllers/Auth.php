@@ -123,23 +123,36 @@ class Auth extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'ardiansyahbugas@gmail.com',
-            'smtp_pass' => '200616ynf',
+            'smtp_pass' => '200616yhosi',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
             'newline' => "\r\n"
         ];
 
-        $this->load->library('email', $config);
+        //$this->load->library('email', $config);
         $this->email->initialize($config);  //tambahkan baris ini
 
         $this->email->from('ardiansyahbugas@gmail.com', 'Matla');
         $this->email->to($this->input->post('email'));
+        // untuk cek apakah $type == 'verify' untuk verifikasi akun
+        // untuk cek apakah $type == 'verify' untuk verifikasi akun
         if ($type == 'verify') {
-            $this->email->subject('Account Verification');
-            //cara baca nya : base_url(). di gabung ke controller auth and method verify ... setiap = berarti di gabung
-            $this->email->message('Klik tautan ini untuk memverifikasi akun Anda : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Aktivasi</a>');
+            $this->email->subject('Aktivasi Akun');
+            $this->email->message('
+            <h1>Selamat anda telah berhasil mendaftar!</h1><br><br>
+            <p>Tinggal selangkah lagi akun anda akan aktif.<br>
+            Klik link aktivasi ini untuk mengaktifkan akun anda: <strong><a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Aktifkan</a></strong>
+            <br><br>
+            Masa aktif link 1x24, lebih dari itu anda harus mendaftar ulang.</p>
+            ');
         }
+
+        // if ($type == 'verify') {
+        //     $this->email->subject('Account Verification');
+        //     //cara baca nya : base_url(). di gabung ke controller auth and method verify ... setiap = berarti di gabung
+        //     $this->email->message('Klik tautan ini untuk memverifikasi akun Anda : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Aktivasi</a>');
+        // }
 
         if ($this->email->send()) {
             return true;
@@ -203,3 +216,6 @@ class Auth extends CI_Controller
         $this->load->view('auth/blocked');
     }
 }
+
+
+//coding versi indonesia https://drive.google.com/file/d/1O_DASPd5sz4K0ZUToT20NneCXKexCYeU/view
