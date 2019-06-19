@@ -146,6 +146,13 @@ class Auth extends CI_Controller
             <br><br>
             Masa aktif link 1x24, lebih dari itu anda harus mendaftar ulang.</p>
             ');
+        } else if ($type == 'forgot') {
+            $this->email->subject('Reset Password');
+            $this->email->message('
+            <p>Klik link ini untuk reset password akun anda: <strong><a href="' . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Reset Password</a></strong>
+            <br><br>
+            Masa aktif link 1x24, lebih dari itu anda harus melakukan reset ulang.</p>
+            ');
         }
 
         // if ($type == 'verify') {
@@ -214,6 +221,44 @@ class Auth extends CI_Controller
     public function blocked()
     {
         $this->load->view('auth/blocked');
+    }
+
+    //lupa password
+    public function forgotPassword()
+    {
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Lupa Password';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/forgot-password');
+            $this->load->view('templates/auth_footer');
+        } else {
+            $email = $this->input->post('email');
+            //cek di dalam data base ada atau tdk. dan di masukan ke dlm variabel $user
+            //dan di tambah apakah user sudah aktiv
+            $user = $this->db->get_where('user', ['email' => $email, 'is_active' => 1])->row_array();
+            
+            //cek lagi apakah user ada
+            if ($user) {
+                // siapkan token 
+                $token = base64_encode(random_bytes(32));
+                //mengambil data dari 91        
+                $user_token = [
+                    'email' => $email,
+                    'token' => $token,
+                    'date_created' => time()
+                ];
+                //kita gunain query builder punya Codeigniter
+                $this->db->insert('user_token', $user_token);
+                $this->_sendEmail($token, 'forgot');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Silahkan cek email anda untuk reset password!</div>');
+                redirect('auth/forgotpassword');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum terdaftar atau belum aktif!</div>');
+                redirect('auth/forgotpassword');
+            }
+        }
     }
 }
 
