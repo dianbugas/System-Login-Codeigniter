@@ -6,7 +6,7 @@ class Menu extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-                                        // di tendang supaya user sembarangan tdk masuk sembarangan lewat url
+        // di tendang supaya user sembarangan tdk masuk sembarangan lewat url
         is_logged_in();
     }
 
@@ -14,9 +14,9 @@ class Menu extends CI_Controller
     {
         $data['title'] = 'Menu Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-                                        // Query data menu
+        // Query data menu
         $data['menu'] = $this->db->get('user_menu')->result_array();
-                                        // roles untuk menu
+        // roles untuk menu
         $this->form_validation->set_rules('menu', 'Menu', 'required'); //name nya menu di index
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -25,7 +25,7 @@ class Menu extends CI_Controller
             $this->load->view('menu/index', $data);
             $this->load->view('templates/footer');
         } else {
-                                                            //insert ke tabel menu(tambah) dan di ambil dari inputan
+            //insert ke tabel menu(tambah) dan di ambil dari inputan
             $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New menu added!</div>');
             redirect('menu');
@@ -36,10 +36,10 @@ class Menu extends CI_Controller
     {
         $data['title'] = 'Submenu Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-                                        // load submenu yg di bawah
+        // load submenu yg di bawah
         $this->load->model('Menu_model', 'menu');
-                                        //query submenu
-                                        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        //query submenu
+        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
         $data['subMenu'] = $this->menu->getSubMenu();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 

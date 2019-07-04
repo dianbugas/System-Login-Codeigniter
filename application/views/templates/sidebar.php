@@ -1,35 +1,30 @@
-
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-users-cog"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">User MA</div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Membuat QUERY MENU -->
-      <?php
-
-      $role_id = $this->session->userdata('role_id'); //menuimpan ke dalam variabel
-      $queryMenu = "SELECT `user_menu`.`id`, `menu`
-                     FROM `user_menu` JOIN `user_access_menu`
-                     ON `user_menu`.`id` = `user_access_menu`.`menu_id`
-                     WHERE `user_access_menu`.`role_id` = $role_id
-                     ORDER BY `user_access_menu`.`menu_id` ASC
-                    ";
-      $menu = $this->db->query($queryMenu)->result_array(); //memanggil query nya
-      ?>
-      <!-- Looping menu -->
-      <?php foreach ($menu as $m) : ?>
-      <div class="sidebar-heading">
-        <?= $m['menu']; ?>
-      </div>
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('dashboard'); ?>">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-users-cog"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">STT NF</div>
+  </a>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+    <!-- Membuat QUERY MENU -->
+    <?php
+    $role_id = $this->session->userdata('role_id'); //menuimpan ke dalam variabel
+    $queryMenu = "SELECT `user_menu`.`id`, `menu`
+                  FROM `user_menu` JOIN `user_access_menu`
+                  ON `user_menu`.`id` = `user_access_menu`.`menu_id`
+                  WHERE `user_access_menu`.`role_id` = $role_id
+                  ORDER BY `user_access_menu`.`menu_id` DESC
+                  ";
+    $menu = $this->db->query($queryMenu)->result_array(); //memanggil query nya
+    ?>
+    <!-- Looping menu -->
+    <?php foreach ($menu as $m) : ?>
+    <div class="sidebar-heading">
+      <?= $m['menu']; ?>
+    </div>
 
       <!-- SIAPKAN SUB-MENU SESUAI MENU FORENT KEY DUA TEBEL -->
 
@@ -65,7 +60,7 @@
         <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
           <i class="fas fa-fw fa-sign-out-alt"></i>
           <span>Logout</span></a>
-      </li> 
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

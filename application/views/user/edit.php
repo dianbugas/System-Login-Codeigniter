@@ -19,7 +19,7 @@
                 </div>
             </div>
              <div class="form-group row">
-                <div class="col-sm-2">Picture</div>
+                <div class="col-sm-2">Gambar</div>
                 <div class="col-sm-10">
                     <div class="row">
                         <div class="col-sm-3">
