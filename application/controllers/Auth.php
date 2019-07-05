@@ -7,7 +7,7 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->library('googleplus');
+        //$this->load->library('googleplus');
     }
 
     public function index()
@@ -318,62 +318,59 @@ class Auth extends CI_Controller
         }
     }
 
-    public function google_login()
-    {
-        if (isset($_GET['code'])) {
-            $this->googleplus->getAuthenticate();
-            $user = $this->googleplus->getUserInfo();
-            $checkemail = $this->db->query('select id,email 
-              from users where email = "' . $user["email"] . '"');
-            $emailresult = $checkemail->result_array();
-            if ($emailresult[0]['email'] != $user["email"]) {
-                $user_information = array(
-                    'name' => $user["name"],
-                    'first_name' => $user["given_name"],
-                    'last_name' => $user["family_name"],
-                    'email' => $user["email"],
-                    'gender' => $user["gender"],
-                    'source_id' => $user["id"],
-                    'source' => 'Google',
-                    'profilepicture' => $user["picture"],
-                );
-                $this->welcome->insert_user($user_information);
-                $insert_id = $this->db->insert_id();
-                $fetchuser = $this->db->query('select * 
-             from users where id = "' . $insert_id . '"');
-                $userdata = $fetchuser->result_array();
-                $this->session->set_userdata('user_id', $userdata[0]['id']);
-                $this->session->set_userdata('user_name', $userdata[0]['name']);
-                $this->session->set_userdata('user_email', $userdata[0]['email']);
-                $this->session->set_userdata('user_gender', $userdata[0]['gender']);
-                $this->session->set_userdata('user_source', $userdata[0]['source']);
-                $this->session->set_userdata('user_source_id', $userdata[0]['source_id']);
-            } else if ($emailresult[0]['email'] == $user["email"]) {
-                $update_id = array(
-                    'source_id' => $user["id"],
-                    'source' => 'Google',
-                    'profilepicture' => $user["picture"]
-                );
-                $this->db->where('id', $emailresult[0]['id']);
-                $this->db->update('users', $update_id);
-                $fetchuser = $this->db->query('select * 
-            from users where id = "' . $emailresult[0]['id'] . '"');
-                $userdata = $fetchuser->result_array();
-                $this->session->set_userdata('user_id', $userdata[0]['id']);
-                $this->session->set_userdata('user_name', $userdata[0]['name']);
-                $this->session->set_userdata('user_email', $userdata[0]['email']);
-                $this->session->set_userdata('user_gender', $userdata[0]['gender']);
-                $this->session->set_userdata('user_source', $userdata[0]['source']);
-                $this->session->set_userdata('user_source_id', $userdata[0]['source_id']);
-            }
+    // public function google_login()
+    // {
+    //     if (isset($_GET['code'])) {
+    //         $this->googleplus->getAuthenticate();
+    //         $user = $this->googleplus->getUserInfo();
+    //         $checkemail = $this->db->query('select id,email from users where email = "' . $user["email"] . '"');
+    //         $emailresult = $checkemail->result_array();
+    //         if ($emailresult[0]['email'] != $user["email"]) {
+    //             $user_information = array(
+    //                 'name' => $user["name"],
+    //                 'first_name' => $user["given_name"],
+    //                 'last_name' => $user["family_name"],
+    //                 'email' => $user["email"],
+    //                 'gender' => $user["gender"],
+    //                 'source_id' => $user["id"],
+    //                 'source' => 'Google',
+    //                 'profilepicture' => $user["picture"],
+    //             );
+    //             $this->welcome->insert_user($user_information);
+    //             $insert_id = $this->db->insert_id();
+    //             $fetchuser = $this->db->query('select * from users where id = "' . $insert_id . '"');
+    //             $userdata = $fetchuser->result_array();
+    //             $this->session->set_userdata('user_id', $userdata[0]['id']);
+    //             $this->session->set_userdata('user_name', $userdata[0]['name']);
+    //             $this->session->set_userdata('user_email', $userdata[0]['email']);
+    //             $this->session->set_userdata('user_gender', $userdata[0]['gender']);
+    //             $this->session->set_userdata('user_source', $userdata[0]['source']);
+    //             $this->session->set_userdata('user_source_id', $userdata[0]['source_id']);
+    //         } else if ($emailresult[0]['email'] == $user["email"]) {
+    //             $update_id = array(
+    //                 'source_id' => $user["id"],
+    //                 'source' => 'Google',
+    //                 'profilepicture' => $user["picture"]
+    //             );
+    //             $this->db->where('id', $emailresult[0]['id']);
+    //             $this->db->update('users', $update_id);
+    //             $fetchuser = $this->db->query('select * from users where id = "' . $emailresult[0]['id'] . '"');
+    //             $userdata = $fetchuser->result_array();
+    //             $this->session->set_userdata('user_id', $userdata[0]['id']);
+    //             $this->session->set_userdata('user_name', $userdata[0]['name']);
+    //             $this->session->set_userdata('user_email', $userdata[0]['email']);
+    //             $this->session->set_userdata('user_gender', $userdata[0]['gender']);
+    //             $this->session->set_userdata('user_source', $userdata[0]['source']);
+    //             $this->session->set_userdata('user_source_id', $userdata[0]['source_id']);
+    //         }
 
-            $data['userprofile'] = $this->session->userdata();
-            redirect('welcome/profile', $data);
-        } else {
-            echo 'We are unable fetch your google information.';
-            exit;
-        }
-    }
+    //         $data['userprofile'] = $this->session->userdata();
+    //         redirect('welcome/profile', $data);
+    //     } else {
+    //         echo 'We are unable fetch your google information.';
+    //         exit;
+    //     }
+    // }
 }
 
 

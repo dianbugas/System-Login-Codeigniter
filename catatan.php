@@ -3,3 +3,6 @@ Berikut adalah ID klien Anda
 
 Berikut adalah rahasia klien Anda
 AU8k-efG37C2UQGr_EgkMQih
+
+kunci api anda
+AIzaSyCElbkScU7muOkCEnBKNUytCHXCPR8eDiI
