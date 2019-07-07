@@ -33,8 +33,10 @@ class Auth extends CI_Controller
     {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
+
         //ambil data user dari data base
-        $user = $this->db->get_where('user', ['email' => $email])->row_array(); //row_array(untuk mendapatkan 1 baris);
+        $user = $this->db->get_where('user', ['email' => $email])->row_array(); //row_array(untuk mendapatkan all baris);
+        
         //jika user ada
         if ($user) {
             //jika user aktif
@@ -45,25 +47,27 @@ class Auth extends CI_Controller
                         'email' => $user['email'],
                         'role_id' => $user['role_id']
                     ];
-
                     $this->session->set_userdata($data); //disimpan ke dalam ssession data
+                    
                     //cek apakah login user atau admin (cek role_id admin atau user)
-                    if ($user['role_id'] == 1) { // mengambild ata dari baris 32
+                    if ($user['role_id'] == 1) { // mengambil data dari baris 38
                         redirect('admin');
                     } else {
                         redirect('user'); //arahkan ke controller user   
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
+                    //cek apakah password benar!
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password anda salah!</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This Email has not been activated!</div>');
+                //cek aktivasi user
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email anda belum aktif!</div>');
                 redirect('auth');
             }
         } else {
-            //pop untuk pesan user belum register
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered!</div>');
+            //cek untuk pesan user belum register
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email anda tidak terdaftar!</div>');
             redirect('auth');
         }
     }
@@ -75,11 +79,11 @@ class Auth extends CI_Controller
         }
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-            'is_unique' => 'This email has already registred!'
+            'is_unique' => 'Email ini sudah terdaftar!'
         ]);
         $this->form_validation->set_rules('password1', 'password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password_dont_match!',
-            'min_length' => 'Password too short!'
+            'matches' => 'Password anda tidak cocok!',
+            'min_length' => 'Password min 4 karakter!'
         ]);
         $this->form_validation->set_rules('password2', 'password', 'required|trim|matches[password1]');
 
@@ -110,13 +114,12 @@ class Auth extends CI_Controller
 
             $this->db->insert('user', $data);
             $this->db->insert('user_token', $user_token);
-
             $this->_sendEmail($token, 'verify');
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Congratulation! your accunt has been created. Please actived your acoount</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! Akun anda telah terdaftar. Silahkan aktifkan akun Anda via Email</div>');
             redirect('auth');
         }
     }
+
     // fungsi type nya ada dua... apakah untuk aktivasi atau forgot password
     private function _sendEmail($token, $type)
     {
@@ -141,7 +144,7 @@ class Auth extends CI_Controller
         if ($type == 'verify') {
             $this->email->subject('Aktivasi Akun');
             $this->email->message('
-            <h1>Selamat anda telah berhasil mendaftar!</h1><br><br>
+            <h1>Selamat anda telah berhasil terdaftar!</h1><br><br>
             <p>Tinggal selangkah lagi akun anda akan aktif.<br>
             Klik link aktivasi ini untuk mengaktifkan akun anda: <strong><a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Aktifkan</a></strong>
             <br><br>
@@ -190,7 +193,7 @@ class Auth extends CI_Controller
 
                     // ketika perintah di atas success maka di hapus tokennya
                     $this->db->delete('user_token', ['email' => $email]);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' has been actived! Please login.</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' Akun anda telah diaktifkan! Silahkan login.</div>');
                     redirect('auth');
 
                 } else {
@@ -198,15 +201,15 @@ class Auth extends CI_Controller
                     $this->db->delete('user', ['email' => $email]);
                     $this->db->delete('user_token', ['email' => $email]);
 
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Token expired.</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Aktivasi akun gagal! Token kedaluwarsa.</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Wrong token.</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Aktivasi akun gagal! Token anda salah.</div>');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Wrong email.</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Aktivasi akun gagal! Email yang salah.</div>');
             redirect('auth');
         }
     }
@@ -215,7 +218,7 @@ class Auth extends CI_Controller
     {
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been loggod out!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah keluar!</div>');
         redirect('auth');
     }
 
@@ -285,7 +288,6 @@ class Auth extends CI_Controller
         }
     }
 
-
     public function changePassword()
     {
         //kita buat method apa.supaya user tidak dpt asal mengubah password tanpa email. dan di tendang ke login
@@ -317,61 +319,4 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
-
-    // public function google_login()
-    // {
-    //     if (isset($_GET['code'])) {
-    //         $this->googleplus->getAuthenticate();
-    //         $user = $this->googleplus->getUserInfo();
-    //         $checkemail = $this->db->query('select id,email from users where email = "' . $user["email"] . '"');
-    //         $emailresult = $checkemail->result_array();
-    //         if ($emailresult[0]['email'] != $user["email"]) {
-    //             $user_information = array(
-    //                 'name' => $user["name"],
-    //                 'first_name' => $user["given_name"],
-    //                 'last_name' => $user["family_name"],
-    //                 'email' => $user["email"],
-    //                 'gender' => $user["gender"],
-    //                 'source_id' => $user["id"],
-    //                 'source' => 'Google',
-    //                 'profilepicture' => $user["picture"],
-    //             );
-    //             $this->welcome->insert_user($user_information);
-    //             $insert_id = $this->db->insert_id();
-    //             $fetchuser = $this->db->query('select * from users where id = "' . $insert_id . '"');
-    //             $userdata = $fetchuser->result_array();
-    //             $this->session->set_userdata('user_id', $userdata[0]['id']);
-    //             $this->session->set_userdata('user_name', $userdata[0]['name']);
-    //             $this->session->set_userdata('user_email', $userdata[0]['email']);
-    //             $this->session->set_userdata('user_gender', $userdata[0]['gender']);
-    //             $this->session->set_userdata('user_source', $userdata[0]['source']);
-    //             $this->session->set_userdata('user_source_id', $userdata[0]['source_id']);
-    //         } else if ($emailresult[0]['email'] == $user["email"]) {
-    //             $update_id = array(
-    //                 'source_id' => $user["id"],
-    //                 'source' => 'Google',
-    //                 'profilepicture' => $user["picture"]
-    //             );
-    //             $this->db->where('id', $emailresult[0]['id']);
-    //             $this->db->update('users', $update_id);
-    //             $fetchuser = $this->db->query('select * from users where id = "' . $emailresult[0]['id'] . '"');
-    //             $userdata = $fetchuser->result_array();
-    //             $this->session->set_userdata('user_id', $userdata[0]['id']);
-    //             $this->session->set_userdata('user_name', $userdata[0]['name']);
-    //             $this->session->set_userdata('user_email', $userdata[0]['email']);
-    //             $this->session->set_userdata('user_gender', $userdata[0]['gender']);
-    //             $this->session->set_userdata('user_source', $userdata[0]['source']);
-    //             $this->session->set_userdata('user_source_id', $userdata[0]['source_id']);
-    //         }
-
-    //         $data['userprofile'] = $this->session->userdata();
-    //         redirect('welcome/profile', $data);
-    //     } else {
-    //         echo 'We are unable fetch your google information.';
-    //         exit;
-    //     }
-    // }
 }
-
-
-//coding versi indonesia https://drive.google.com/file/d/1O_DASPd5sz4K0ZUToT20NneCXKexCYeU/view

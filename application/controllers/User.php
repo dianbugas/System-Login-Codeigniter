@@ -14,7 +14,6 @@ class User extends CI_Controller
     {
         $data['title'] = 'My Profile';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -71,7 +70,7 @@ class User extends CI_Controller
             $this->db->where('email', $email);
             $this->db->update('user');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil Anda telah diperbarui!</div>');
             redirect('user');
 
         }
@@ -98,12 +97,12 @@ class User extends CI_Controller
             $new_password = $this->input->post('new_password1');
             if (!password_verify($current_password, $data['user']['password'])) {
                 //cek password apakah sama yg dinput dgn data di dlam data base.  klu tdk tampilkan berikut
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password anda salah saat ini!</div>');
                 redirect('user/changepassword');
             } else {
                 //cek apakah password lama sama dgn inputan password baru
                 if ($current_password == $new_password) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kata sandi baru tidak boleh sama dengan kata sandi saat ini!</div>');
                     redirect('user/changepassword');
                 } else {
                     //jika beda maka bener /sudah oke
@@ -114,7 +113,7 @@ class User extends CI_Controller
                     $this->db->where('email', $this->session->userdata('email'));
                     $this->db->update('user');
 
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kata sandi berubah!</div>');
                     redirect('user/changepassword');
                 }
             }

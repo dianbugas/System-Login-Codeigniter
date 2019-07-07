@@ -6,14 +6,13 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // di tendang supaya user sembarangan tdk masuk sembarangan lewat url
+        // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
     }
 
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        // Query data menu
         $data['title'] = 'Dashboard';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
