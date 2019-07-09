@@ -6,6 +6,8 @@ class Menu extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Menu_model');
+        $this->load->library('form_validation');
         // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
     }
@@ -32,9 +34,20 @@ class Menu extends CI_Controller
         }
     }
 
-    public function ubah($id)
+    public function detail($id)
     {
-        $data['title'] = 'Ubah Data';
+        $data['title'] = 'Detail Data Menu';
+        $data['menu'] = $this->Menu_model->getMenuById($id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/index', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function edit($id)
+    {
+        $data['title'] = 'Edit Profile';
         $data['menu'] = $this->Menu_model->getMenuById($id);
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
@@ -43,16 +56,21 @@ class Menu extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('menu/index', $data);
+            $this->load->view('menu/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
-            //$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu baru ditambahkan!</div>');
+            $this->Menu_model->editDataMenu($id);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil Anda telah diperbarui!</div>');
             redirect('menu');
+
         }
     }
 
-    // tambah data
+
+
+
+
+    // tambah data submenu
     public function submenu()
     {
         $data['title'] = 'Submenu Management';

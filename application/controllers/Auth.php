@@ -51,9 +51,9 @@ class Auth extends CI_Controller
                     
                     //cek apakah login user atau admin (cek role_id admin atau user)
                     if ($user['role_id'] == 1) { // mengambil data dari baris 38
-                        redirect('admin');
+                        redirect('dashboard');
                     } else {
-                        redirect('user'); //arahkan ke controller user   
+                        redirect('dashboard'); //arahkan ke controller user   
                     }
                 } else {
                     //cek apakah password benar!
@@ -319,4 +319,65 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
+
+    // public function log_with_google()
+    // {
+    //     # cek sudah login belum
+    //     if (!empty($this->session->userdata('_login'))) {
+    //         redirect('dashboard');
+    //     }
+  
+    //     # redirect ke auth url google
+    //     $client = $this->get_google_client();
+    //     $auth_url = $client->createAuthUrl();
+    //     redirect($auth_url);
+    // }
+
+    // public function google()
+    // {
+    // # kalo sudah login atau tidak ada get code, redirect
+    //     if (!empty($this->session->userdata('login')) or empty($_GET['code'])) {
+    //         redirect('dashboard');
+    //     }
+
+    //     $client = $this->get_google_client();
+    //     $client->authenticate($_GET['code']);
+ 
+    // # ambil profilenya
+    //     $plus = new Google_Service_Plus($client);
+    //     $profile = $plus->people->get("me");
+     
+    // # cek dulu sudah ada belum
+    //     $user = $this->AuthModel->retrieve("", $profile['emails'][0]['value']);
+    // # jika belum ada, simpan
+    //     if (empty($user)) {
+    //         $user_id = $this->AuthModel->create(
+    //             $profile['emails'][0]['value'],
+    //             "",
+    //             $profile['name']['familyName'],
+    //             $profile['image']['url']
+    //         );
+
+    //         $user = $this->AuthModel->retrieve($user_id);
+    //     }
+
+    //     $this->session->set_userdata('login', $user);
+
+    //     redirect('dashboard');
+    // }
+
+    // private function get_google_client()
+    // {
+    //     $client = new Google_Client();
+    //     $client->setAuthConfigFile(APPPATH . 'client_secret.json'); //rename file ini supaya lebih aman nanti
+    //     $client->setRedirectUri("http://localhost/CI/waket3/");
+    //     $client->setScopes(array(
+    //         "https://www.googleapis.com/auth/plus.login",
+    //         "https://www.googleapis.com/auth/userinfo.email",
+    //         "https://www.googleapis.com/auth/userinfo.profile",
+    //         "https://www.googleapis.com/auth/plus.me",
+    //     ));
+
+    //     return $client;
+    // }
 }

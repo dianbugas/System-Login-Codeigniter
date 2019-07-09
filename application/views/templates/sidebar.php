@@ -2,10 +2,10 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('dashboard'); ?>">
-    <div class="sidebar-brand-icon rotate-n-15">
+    <!-- <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-users-cog"></i>
-    </div>
-    <div class="sidebar-brand-text mx-3">STT NF</div>
+    </div> -->
+    <div class="sidebar-brand-text mx-3">Divisi Waket 3</div>
   </a>
   <!-- Divider -->
   <hr class="sidebar-divider">
