@@ -41,14 +41,14 @@ class Menu extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('menu/index', $data);
+        $this->load->view('menu/detail', $data);
         $this->load->view('templates/footer');
     }
 
     public function edit($id)
     {
         $data['title'] = 'Edit Profile';
-        $data['menu'] = $this->Menu_model->getMenuById($id);
+        $data['user_menu'] = $this->Menu_model->getMenuById($id);
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
 
@@ -59,11 +59,18 @@ class Menu extends CI_Controller
             $this->load->view('menu/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Menu_model->editDataMenu($id);
+            $this->Menu_model->editDataMenuById($id);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil Anda telah diperbarui!</div>');
             redirect('menu');
 
         }
+    }
+
+    public function delete($id)
+    {
+        $this->Menu_model->deleteDataMenuById($id);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('menu');
     }
 
 
@@ -107,12 +114,20 @@ class Menu extends CI_Controller
         }
     }
 
+    public function lengkap($id)
+    {
+        $data['title'] = 'Detail Data Menu';
+        $data['menu'] = $this->Menu_model->getSubMenuById($id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('submenu/lengkap', $data);
+        $this->load->view('templates/footer');
+    }
     public function hapus($id)
     {
-        $this->Menu_model->hapusDataSubMenu($id);
-        //$this->session->set_flashdata('falsh', 'Dihapus');
-        redirect('menu/submenu');
+        $this->Menu_model->hapusDataSubMenuById($id);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('submenu');
     }
-
-
 }

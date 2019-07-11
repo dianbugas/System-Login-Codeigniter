@@ -8,8 +8,8 @@
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-form-label">Menu</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control" id="email" name="email" value="<?= $menu['menu']; ?>" readonly>
-                </div>
+                <input type="text" class="form-control" id="email" name="email">
+            </div>
             </div>
             <div class="form-file row justify-content-end">
                 <div class="col-sm-10">
@@ -19,7 +19,6 @@
             </form>
         </div>
     </div>
-</div>
 <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->

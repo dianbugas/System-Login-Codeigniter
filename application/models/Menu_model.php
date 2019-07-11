@@ -1,22 +1,27 @@
 <?php 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class menu_model extends CI_Model
+class Menu_model extends CI_Model
 {
     //menu
     public function getMenuById($id)
     {
-        return $this->db->get_where('menu', ['id' => $id])->row_array();
+        return $this->db->get_where('user_menu', ['id' => $id])->row_array();
     }
 
-    public function editDataMenu()
+    public function editDataMenuById()
     {
         $data = [
             "menu" => $this->input->post('menu', true)
         ];
 
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('menu', $data);
+        $this->db->update('user_menu', $data);
+    }
+
+    public function deleteDataMenuById($id)
+    {
+        $this->db->delete('user_menu', ['id' => $id]);
     }
 
 
@@ -31,13 +36,13 @@ class menu_model extends CI_Model
         return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
 
-    public function hapusDataMenuById($id)
+    public function getSubMenuById($id)
     {
-        return $this->db->get_where('menu', ['id' => $id])->row_array();
+        return $this->db->get_where('user_sub_menu', ['id' => $id])->row_array();
     }
 
-    public function hapusDataSubMenu($id)
+    public function hapusDataSubMenuById($id)
     {
-        $this->db->delete('menu/submenu', ['id' => $id]);
+        $this->db->delete('user_sub_menu', ['id' => $id]);
     }
 }
