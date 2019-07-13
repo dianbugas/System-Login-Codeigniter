@@ -30,6 +30,7 @@ class Menu extends CI_Controller
             //insert ke tabel menu(tambah) dan di ambil dari inputan
             $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu baru ditambahkan!</div>');
+            //$this->session->set_flashdata('flash', 'Ditambahkan');
             redirect('menu');
         }
     }
@@ -37,6 +38,7 @@ class Menu extends CI_Controller
     public function detail($id)
     {
         $data['title'] = 'Detail Data Menu';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['menu'] = $this->Menu_model->getMenuById($id);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -48,6 +50,7 @@ class Menu extends CI_Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Profile';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['user_menu'] = $this->Menu_model->getMenuById($id);
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');

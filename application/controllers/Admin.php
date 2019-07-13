@@ -69,4 +69,42 @@ class Admin extends CI_Controller
         }
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akses Berubah!</div>');
     }
+
+    //tambah users
+    public function users()
+    {
+        $data['title'] = 'Users';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        // load submenu yg di bawah
+        $this->load->model('User_model', 'user');
+        //query submenu
+        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        $data['users'] = $this->user->getAllUser();
+        //untuk topbar jika error
+        //$data['users'] = $this->db->get('user_menu')->result_array();
+
+        // $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
+        // $this->form_validation->set_rules('menu_id', 'Menu', 'required');
+        // $this->form_validation->set_rules('url', 'URL', 'required');
+        // $this->form_validation->set_rules('icon', 'Icon', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/users', $data);
+            $this->load->view('templates/footer');
+        } else {
+            // $data = [
+            //     'title' => $this->input->post('title'),
+            //     'menu_id' => $this->input->post('menu_id'),
+            //     'url' => $this->input->post('url'),
+            //     'icon' => $this->input->post('icon'),
+            //     'is_active' => $this->input->post('is_active')
+            // ];
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
+            redirect('user/users');
+        }
+    }
 }
