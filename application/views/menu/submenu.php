@@ -34,8 +34,8 @@
       <td><?= $sm['icon']; ?></td>
       <td><?= $sm['is_active']; ?></td>
       <td>
-      <a href="#" class="badge badge-success">Edit</a>
-      <a href="<?= base_url(); ?>submenu/hapus/cd<?= $sm['id']; ?>" class="badge badge-danger">delete</a>
+      <a href="<?= base_url(); ?>menu/editsub/<?= $sm['id']; ?>" class="badge badge-success">Edit</a>
+      <a href="<?= base_url(); ?>menu/hapus/<?= $sm['id']; ?>" class="badge badge-danger">delete</a>
       </td>
     </tr>
 <?php endforeach; ?>

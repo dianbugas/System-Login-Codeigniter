@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" id="name" name="name" value="<?= $user['name']; ?>">
                 <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
-            </div>
+            </div> 
             <div class="form-group row">
                 <div class="col-sm-2">Gambar</div>
                 <div class="col-sm-10">

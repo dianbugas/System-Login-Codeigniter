@@ -5,12 +5,12 @@
         <h3 style="color:red;">BAGIAN EDIT MASIH ERORR BELUM TERSIMPAN DI DATABASE yg lain fix</h3>
         <div class="row">
             <div class="col-lg-6">
-                <?= form_open_multipart('menu/edit'); ?>
+                <?= form_open_multipart('menu/editsub'); ?>
                     <div class="form-group row">
-                        <label for="menu" class="col-sm-2 col-form-label">Menu</label>
+                        <label for="title" class="col-sm-2 col-form-label">Title</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="menu" name="menu" value="#">
-                        <?= form_error('menu', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <input type="text" class="form-control" id="title" name="title" value="#">
+                        <?= form_error('title', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                     </div>
                     <div class="form-file row justify-content-end">
@@ -25,4 +25,3 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
-
