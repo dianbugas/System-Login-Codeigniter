@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2019 at 04:30 PM
+-- Generation Time: Jul 26, 2019 at 09:34 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -44,7 +44,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(49, 'admin', 'dianbugas@gmail.com', 'default.jpg', '$2y$10$QWomy7..tQcVybft13OhrOEafIjvo4xXjo4.qfAs0K5yKwDlc/9qS', 1, 1, 1562234937);
+(49, 'admin', 'dianbugas@gmail.com', 'java2.png', '$2y$10$QWomy7..tQcVybft13OhrOEafIjvo4xXjo4.qfAs0K5yKwDlc/9qS', 1, 1, 1562234937),
+(51, 'dianbugas123', 'dianynf20@gmail.com', 'default.jpg', '$2y$10$EtP.dz3lZ7I4tW89QfCGhOjf2sJrN7shhCEITj3TfreLX2Ilfj6Z2', 2, 0, 1562641153),
+(52, 'dianbugas123', 'muhammadardiyansyah889@gmail.com', 'default.jpg', '$2y$10$VwFXaQ4MbaruJYWg907mrOEO.8coV8Q9WSSGRoFvnRRtdZmPv3b3S', 2, 1, 1562641208);
 
 -- --------------------------------------------------------
 
@@ -65,12 +67,15 @@ CREATE TABLE `user_access_menu` (
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (8, 1, 2),
-(12, 2, 12),
 (16, 1, 13),
 (17, 1, 3),
 (18, 1, 4),
 (19, 2, 4),
-(21, 2, 2);
+(21, 2, 2),
+(24, 2, 5),
+(25, 1, 5),
+(26, 2, 12),
+(27, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -91,7 +96,7 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'admin'),
 (2, 'user'),
 (3, 'menu'),
-(4, 'dashboard');
+(12, 'dashboard');
 
 -- --------------------------------------------------------
 
@@ -138,7 +143,10 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
 (7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
 (8, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1),
-(9, 4, 'Dashboard', 'dashboard', 'fas fa-fw fa-tachometer-alt', 1);
+(9, 4, 'Dashboard', 'dashboard', 'fas fa-fw fa-tachometer-alt', 1),
+(14, 1, 'Users', 'admin/users', 'fas fa-fw fa-users', 1),
+(21, 5, 'Dashboard', 'dashboard', 'fas fa-fw fa-tachometer-alt', 1),
+(22, 12, 'Dashboard', 'dashboard', 'fas fa-fw fa-tachometer-alt', 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +167,9 @@ CREATE TABLE `user_token` (
 
 INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
 (1, 'aku@aku.aku', 's+q8JCFHahCbG+yuZkMYDAvP74cWddlH5GLAgtpI8f0=', 1562320292),
-(2, 'dianbugas@gmail.das', 'NATPjcrQs1rbcOSl6iUQaAgCE1nu29dvv9Vore3NFMI=', 1562321218);
+(2, 'dianbugas@gmail.das', 'NATPjcrQs1rbcOSl6iUQaAgCE1nu29dvv9Vore3NFMI=', 1562321218),
+(3, 'dianynf20@gmail.com', 'C6yY1lQjKbiZi0A5iHMYbASiD/+BT3kDJKcmDCIMIrI=', 1562640982),
+(4, 'dianynf20@gmail.com', 'tzkn9Jwe2QxjFAjl1bCzJLbAhG88j50gesIg/IdLZnA=', 1562641153);
 
 --
 -- Indexes for dumped tables
@@ -209,19 +219,19 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -233,13 +243,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
