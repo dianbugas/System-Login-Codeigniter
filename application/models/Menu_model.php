@@ -4,12 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Menu_model extends CI_Model
 {
     //menu
-    public function getMenuById($id)
-    {
-        return $this->db->get_where('user_menu', ['id' => $id])->row_array();
-    }
-
-    public function editDataMenuById()
+    public function editDataMenu()
     {
         $data = [
             "menu" => $this->input->post('menu', true)
@@ -17,6 +12,11 @@ class Menu_model extends CI_Model
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('user_menu', $data);
+    }
+
+    public function getMenuById($id)
+    {
+        return $this->db->get_where('user_menu', ['id' => $id])->row_array();
     }
 
     public function deleteDataMenuById($id)

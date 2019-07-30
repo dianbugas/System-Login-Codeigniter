@@ -35,12 +35,11 @@ class Menu extends CI_Controller
         }
     }
 
-    // MASIH ERORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR belom bisa nyimpan ke database
     public function edit()
     {
         $data['title'] = 'Edit Menu Management';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         //$data['user_menu'] = $this->Menu_model->getMenuById($id);
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); 
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
 
@@ -51,11 +50,7 @@ class Menu extends CI_Controller
             $this->load->view('menu/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $data = [
-                "menu" => $this->input->post('menu', true)
-            ];
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('user_menu', $data);
+            $this->Menu_model->editDataMenu($id);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
             redirect('menu');
 
@@ -68,10 +63,6 @@ class Menu extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Menu di hapus!</div>');
         redirect('menu');
     }
-
-
-
-
 
     // tambah data submenu
     public function submenu()

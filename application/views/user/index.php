@@ -22,7 +22,12 @@
                   <p class="card-text"><?= $user['email']; ?></p>
                   <p class="card-text"><small class="text-muted">Terdaftar <?= date('d F Y', $user['date_created']); ?></small></p>
                 </div>
-              </div>
+                <div class="form-file row justify-content-end">
+                  <div class="col-md-9">
+                    <a href="<?= base_url(); ?>user/edit/<?= $user['id']; ?>" class="btn btn-success">Edit</a>
+                  </div>
+                </div>
+              </div> 
             </div>
           </div>
         </div>
