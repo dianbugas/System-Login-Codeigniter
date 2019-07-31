@@ -6,6 +6,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('User_model');
         // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
     }
@@ -106,5 +107,12 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
             redirect('user/users');
         }
+    }
+
+    public function hapus($id)
+    {
+        $this->User_model->hapusDataUserById($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Sub Menu di hapus!</div>');
+        redirect('admin/users');
     }
 }
