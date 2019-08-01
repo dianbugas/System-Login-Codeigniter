@@ -35,11 +35,22 @@ class Menu extends CI_Controller
         }
     }
 
-    public function edit()
+    public function detail($id)
+    {
+        $data['title'] = 'Detail Menu';
+        $data['user_menu'] = $this->Menu_model->getMenuById($id);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function edit($id)
     {
         $data['title'] = 'Edit Menu Management';
         //$data['user_menu'] = $this->Menu_model->getMenuById($id);
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); 
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
 
@@ -53,7 +64,6 @@ class Menu extends CI_Controller
             $this->Menu_model->editDataMenu($id);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
             redirect('menu');
-
         }
     }
 

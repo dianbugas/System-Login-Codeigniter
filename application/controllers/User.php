@@ -74,7 +74,6 @@ class User extends CI_Controller
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil Anda telah diperbarui!</div>');
             redirect('user');
-
         }
     }
 

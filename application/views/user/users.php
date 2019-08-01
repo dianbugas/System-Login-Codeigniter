@@ -36,7 +36,7 @@
               <td><?= date('d F Y', $user['date_created']); ?></td>
               <td><img src="<?= base_url('assets/img/profile/') . $us['image']; ?>" class="img-circle" alt="..." width="40" height="40"></td>
               <td>
-                <a href="<?= base_url(); ?>admin/hapus/<?= $m['id']; ?>" class="badge badge-danger">delete</a>
+                <a href="<?= base_url(); ?>admin/hapus/<?= $us['id']; ?>" class="badge badge-danger">delete</a>
               </td>
             </tr>
           <?php endforeach; ?>
