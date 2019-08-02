@@ -30,7 +30,7 @@
               My Profile
             </a>
             <a class="dropdown-item" href="<?= base_url('user/changepassword'); ?>">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
               Lupa password
             </a>
 
