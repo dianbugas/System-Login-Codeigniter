@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-lg-6">
                 <form action="" method='post'>
-                    <input type="hidden" name="id" value="<?= $user_menu['id']; ?>">
+                    <input type="hidden" name="id">
                     <div class="form-group row">
                         <label for="menu" class="col-sm-2 col-form-label">Menu</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="menu" name="menu" value="<?= $user_menu['menu']; ?>">
+                            <input type="text" class="form-control" id="menu" name="menu" value="#">
                             <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                         </div>
                     </div>
