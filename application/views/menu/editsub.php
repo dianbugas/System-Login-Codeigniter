@@ -3,7 +3,7 @@
     <div class="container-fluid">
     <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-        <h3 style="color:red;">BAGIAN EDIT MASIH ERORR BELUM TERSIMPAN DI DATABASE yg lain fix</h3>
+        <h3 style="color:red;">BAGIAN EDIT MASIH ERORR BELUM TERSIMPAN DI DATABASE yg lain fix masih error</h3>
         <div class="row">
             <div class="col-lg-6">
                 <?= form_open_multipart('menu/editsub'); ?>
