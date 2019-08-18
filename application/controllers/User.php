@@ -46,7 +46,7 @@ class User extends CI_Controller
             if ($upload_image) {
                 $config['upload_path'] = './assets/img/profile/';
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max_size'] = '2048';
+                $config['max_size'] = '4048'; //ukuran gambar
 
                 $this->load->library('upload', $config);
 
