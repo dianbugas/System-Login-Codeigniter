@@ -138,6 +138,7 @@ class Menu extends CI_Controller
         $this->form_validation->set_rules('menu_id', 'Menu', 'required');
         $this->form_validation->set_rules('url', 'URL', 'required');
         $this->form_validation->set_rules('icon', 'Icon', 'required');
+
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -152,7 +153,7 @@ class Menu extends CI_Controller
                 'icon' => $this->input->post('icon'),
                 'is_active' => $this->input->post('is_active')
             ];
-            $this->db->update('user_sub_menu', $data);
+            $this->db->insert('user_sub_menu', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
             redirect('menu/submenu');
         }
