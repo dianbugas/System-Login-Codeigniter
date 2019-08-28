@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 col-lg-8">
+  <div class="card mb-2 col-lg-9">
     <div class="row no-gutters">
       <div class="col-md-4">
         <!-- //masih ada bag -->
@@ -19,7 +19,7 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title"><?= $user['name']; ?></h5>
+          <h3 class="card-title"><?= $user['name']; ?></h3>
           <p class="card-text"><?= $user['email']; ?></p>
           <p class="card-text"><small class="text-muted">Terdaftar <?= date('d F Y', $user['date_created']); ?></small></p>
         </div>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="form-file row justify-content-end">
-    <div class="col-md-9">
+    <div class="col-md-12">
       <a href="<?= base_url(); ?>user/edit/<?= $user['id']; ?>" class="btn btn-success">Edit</a>
     </div>
   </div>
