@@ -49,7 +49,6 @@ class Menu extends CI_Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Menu Management';
-        //$data['user_menu'] = $this->Menu_model->getMenuById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
@@ -61,7 +60,11 @@ class Menu extends CI_Controller
             $this->load->view('menu/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Menu_model->editDataMenu($id);
+            $menu = $this->input->post('menu');
+            
+            $this->db->set('menu', $menu);
+            $this->db->where('id', $id);
+            $this->db->update('user_menu');
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
             redirect('menu');
         }
@@ -146,14 +149,15 @@ class Menu extends CI_Controller
             $this->load->view('menu/editsub', $data);
             $this->load->view('templates/footer');
         } else {
-            $data = [
-                'title' => $this->input->post('title'),
-                'menu_id' => $this->input->post('menu_id'),
-                'url' => $this->input->post('url'),
-                'icon' => $this->input->post('icon'),
-                'is_active' => $this->input->post('is_active')
-            ];
-            $this->db->insert('user_sub_menu', $data);
+            $menu_id = $this->input->post('menu_id');
+            $title = $this->input->post('title');
+            $url = $this->input->post('url');
+            $icon = $this->input->post('icon');
+            $is_active = $this->input->post('is_active');
+
+            $this->db->set('icon', $icon);
+            $this->db->where('menu_id', $menu_id);
+            $this->db->update('user_sub_menu');
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
             redirect('menu/submenu');
         }
