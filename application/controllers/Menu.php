@@ -49,6 +49,7 @@ class Menu extends CI_Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Menu Management';
+        $data['menu'] = $this->Menu_model->getMenuById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
@@ -60,11 +61,7 @@ class Menu extends CI_Controller
             $this->load->view('menu/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $menu = $this->input->post('menu');
-            
-            $this->db->set('menu', $menu);
-            $this->db->where('id', $id);
-            $this->db->update('user_menu');
+            $this->Menu_model->editDataMenu($id);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
             redirect('menu');
         }
