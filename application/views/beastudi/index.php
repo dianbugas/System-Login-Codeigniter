@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <?= form_error('pic', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
             <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newRoleModal">Tambah Data Pic</a>
@@ -13,26 +13,34 @@
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Divisi</th>
+                        <th scope="col">Jenis Kelamin</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Angkatan</th>
+                        <th scope="col">Program Studi</th>
+                        <th scope="col">Kontribusi</th>
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <!-- <?php foreach ($pic as $pi) : ?> -->
-                    <tr>
-                        <th scope="row"><?= $i++; ?></th>
-                        <td>#</td>
-                        <td>
-                            <a href="#">Edit</a>
-                            <a href="#" class="badge badge-danger">delete</a>
-                        </td>
-                    </tr>
-                    <!-- <?php endforeach; ?> -->
+                    <?php foreach ($beastudi as $bs) : ?>
+                        <tr>
+                            <th scope="row"><?= $i++; ?></th>
+                            <td><?= $bs['nama']; ?></td>
+                            <td><?= $bs['jk']; ?></td>
+                            <td><?= $bs['semester']; ?></td>
+                            <td><?= $bs['angkatan']; ?></td>
+                            <td><?= $bs['programstudi']; ?></td>
+                            <td><?= $bs['kontribusi']; ?></td>
+                            <td>
+                                <a href="#" class="badge badge-success">Edit</a>
+                                <a href="#" class="badge badge-danger">delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
-
         </div>
-
     </div>
 </div>
 <!-- Modal -->
@@ -40,7 +48,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newRoleModalLabel">Add Pic</h5>
+                <h5 class="register-heading">Identitas Mahasiswa Beastudi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,9 +57,9 @@
             <!-- action untuk mengarakan controller role -->
             <form action="<?= base_url('admin/role'); ?>" method="post">
                 <div class="modal-body">
-                    <h3 class="register-heading">Identitas Anak Beastudi</h3>
+
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Anak Beastudi" value="" />
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" value="" />
                     </div>
                     <div class="form-group">
                         <div class="maxl">
@@ -66,11 +74,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Jurusan" value="" />
+                        <input type="text" class="form-control" placeholder="Semester" value="" />
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Angkatan" value="" />
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Program Studi" value="" />
+                    </div>
+
                     <div class="form-group">
                         <select class="form-control">
                             <option class="hidden" selected disabled>Jenis Kontribusi</option>
@@ -110,11 +122,11 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" class="btnRegister" value="Selesai" />
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- /.container-fluid -->
+</div>
 </div>
