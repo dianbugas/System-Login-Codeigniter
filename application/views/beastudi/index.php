@@ -33,7 +33,7 @@
                             <td><?= $bs['programstudi']; ?></td>
                             <td><?= $bs['kontribusi']; ?></td>
                             <td>
-                                <a href="#" class="badge badge-success">Edit</a>
+                                <a href="<?= base_url(); ?>beastudi/edit/<?= $bs['id']; ?>" class="badge badge-success">Edit</a>
                                 <a href="#" class="badge badge-danger">delete</a>
                             </td>
                         </tr>
