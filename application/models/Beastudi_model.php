@@ -7,4 +7,19 @@ class Beastudi_model extends CI_Model
     {
         return $this->db->get('beastudi')->result_array();
     }
+
+    public function getBeastudiById($id)
+    {
+        return $this->db->get_where('beastudi', ['id' => $id])->row_array();
+    }
+
+    public function editDataBeastudi()
+    {
+        $data = [
+            "nama" => $this->input->post('nama', true)
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('beastudi', $data);
+    }
 }

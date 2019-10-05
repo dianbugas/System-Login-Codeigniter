@@ -55,11 +55,11 @@
             </div>
             <!-- method="post" ketika input tidak terlihat di url -->
             <!-- action untuk mengarakan controller role -->
-            <form action="<?= base_url('admin/role'); ?>" method="post">
+            <form action="<?= base_url('beastudi'); ?>" method="post">
                 <div class="modal-body">
-
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Lengkap" value="" />
+                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
+                        <small class="form-text text-danger"><?= form_error('nama'); ?></small>
                     </div>
                     <div class="form-group">
                         <div class="maxl">
