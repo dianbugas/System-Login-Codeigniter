@@ -131,11 +131,17 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">PIC</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                    <div>
+                                        <a href="" class="text-xs font-weight-bold text-warning text-uppercase mb-1">PIC</a>
+                                    </div>
+                                    <div>
+                                        <a href="" class="h5 mb-0 font-weight-bold text-gray-800">10</a>
+                                    </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    <a href="">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
