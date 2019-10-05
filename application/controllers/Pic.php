@@ -17,10 +17,43 @@ class Pic extends CI_Controller
         $data['title'] = 'Pic';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pic'] = $this->Pic_model->getAllPic();
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('divisi', 'Divisi', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('pic/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'nama' => $this->input->post('nama'),
+                'divisi' => $this->input->post('divisi')
+            ];
+            $this->db->insert('pic', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu baru ditambahkan!</div>');
+            //$this->session->set_flashdata('flash', 'Ditambahkan');
+            redirect('pic');
+        }
+    }
+
+    public function detail($id)
+    {
+        $data['title'] = 'Detail PIC';
+        $data['pic'] = $this->Menu_model->getPicById($id);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('pic/index', $data);
+        $this->load->view('pic/detail', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function delete($id)
+    {
+        $this->Pic_model->deleteDataPicById($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Pic di hapus!</div>');
+        redirect('pic');
     }
 }

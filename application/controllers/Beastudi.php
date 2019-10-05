@@ -48,7 +48,7 @@ class Beastudi extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('beastudi/edit', $data);
+        $this->load->view('beastudi/detail', $data);
         $this->load->view('templates/footer');
     }
 
@@ -75,8 +75,8 @@ class Beastudi extends CI_Controller
 
     public function delete($id)
     {
-        $this->Menu_model->deleteDataMenuById($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Menu di hapus!</div>');
-        redirect('menu');
+        $this->Beastudi_model->deleteDataBeastudiById($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Beastudi di hapus!</div>');
+        redirect('beastudi');
     }
 }

@@ -26,7 +26,7 @@
                             <td><?= $pi['divisi']; ?></td>
                             <td>
                                 <a href="#" class="badge badge-success">Edit</a>
-                                <a href="#" class="badge badge-danger">delete</a>
+                                <a href="<?= base_url(); ?>pic/delete/<?= $pi['id']; ?>" class="badge badge-danger">delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -44,20 +44,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newRoleModalLabel">Add Pic</h5>
+                <h5 class="modal-title" id="newRoleModalLabel">Tambah Data Pic</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- method="post" ketika input tidak terlihat di url -->
             <!-- action untuk mengarakan controller role -->
-            <form action="<?= base_url('admin/role'); ?>" method="post">
+            <form action="<?= base_url('pic'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Lengkap" value="" />
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" value="nama" id="nama" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Bagian / Divisi" value="" />
+                        <input type="text" class="form-control" placeholder="Bagian / Divisi" value="divisi" id="divisi" />
                     </div>
                 </div>
                 <div class="modal-footer">

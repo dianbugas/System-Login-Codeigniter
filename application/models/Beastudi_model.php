@@ -22,4 +22,9 @@ class Beastudi_model extends CI_Model
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('beastudi', $data);
     }
+
+    public function deleteDataBeastudiById($id)
+    {
+        $this->db->delete('beastudi', ['id' => $id]);
+    }
 }

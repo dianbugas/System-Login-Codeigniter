@@ -34,7 +34,7 @@
                             <td><?= $bs['kontribusi']; ?></td>
                             <td>
                                 <a href="<?= base_url(); ?>beastudi/edit/<?= $bs['id']; ?>" class="badge badge-success">Edit</a>
-                                <a href="#" class="badge badge-danger">delete</a>
+                                <a href="<?= base_url(); ?>beastudi/delete/<?= $bs['id']; ?>" class="badge badge-danger">delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
