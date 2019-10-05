@@ -132,14 +132,14 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div>
-                                        <a href="" class="text-xs font-weight-bold text-warning text-uppercase mb-1">PIC</a>
+                                        <a href="<?= base_url(); ?>pic/" class="text-xs font-weight-bold text-warning text-uppercase mb-1">PIC</a>
                                     </div>
                                     <div>
-                                        <a href="" class="h5 mb-0 font-weight-bold text-gray-800">10</a>
+                                        <a href="<?= base_url(); ?>pic/" class="h5 mb-0 font-weight-bold text-gray-800">10</a>
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <a href="">
+                                    <a href="<?= base_url(); ?>pic/">
                                         <i class="fas fa-comments fa-2x text-gray-300"></i>
                                     </a>
                                 </div>
@@ -153,6 +153,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+            <?= form_error('beastudi', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+            <?= $this->session->flashdata('message'); ?>
             <h6 class="m-0 font-weight-bold text-primary">Daftar Nama Mahasiswa Beastudi</h6>
         </div>
         <div class="card-body">
@@ -160,63 +162,69 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Gender</th>
-                            <th>Semester</th>
-                            <th>Angkatan</th>
-                            <th>Program Studi</th>
-                            <th>Peminatan</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Angkatan</th>
+                            <th scope="col">Program Studi</th>
+                            <th scope="col">Kontribusi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
+                        <?php $i = 1; ?>
+                        <?php foreach ($beastudi as $bs) : ?>
+                            <tr>
+                                <th scope="row"><?= $i++; ?></th>
+                                <td><?= $bs['nama']; ?></td>
+                                <td><?= $bs['jk']; ?></td>
+                                <td><?= $bs['semester']; ?></td>
+                                <td><?= $bs['angkatan']; ?></td>
+                                <td><?= $bs['programstudi']; ?></td>
+                                <td><?= $bs['kontribusi']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Content Column -->
+        <div class="col-lg-6 mb-4">
+
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">kontribusi</h6>
+                </div>
+                <div class="card-body">
+                    <h4 class="small font-weight-bold">konten<span class="float-right">20%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h4 class="small font-weight-bold">web dev<span class="float-right">40%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h4 class="small font-weight-bold">LPPM <span class="float-right">60%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h4 class="small font-weight-bold">LPMI <span class="float-right">80%</span></h4>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h4 class="small font-weight-bold">Dev<span class="float-right">Complete!</span></h4>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <!-- End of Main Content -->

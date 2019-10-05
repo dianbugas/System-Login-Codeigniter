@@ -22,9 +22,9 @@
   ?>
   <!-- Looping menu -->
   <?php foreach ($menu as $m) : ?>
-    <div class="sidebar-heading">
+    <!-- <div class="sidebar-heading">
       <?= $m['menu']; ?>
-    </div>
+    </div> -->
 
     <!-- SIAPKAN SUB-MENU SESUAI MENU FORENT KEY DUA TEBEL -->
 
@@ -52,7 +52,7 @@
         </li>
       <?php endforeach; ?>
       <!-- Divider -->
-      <hr class="sidebar-divider mt-3">
+      <hr class="sidebar-divider mt-1">
     <?php endforeach; ?>
 
     <!-- Nav Item - Profile -->
