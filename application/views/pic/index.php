@@ -25,7 +25,7 @@
                             <td><?= $pi['nama']; ?></td>
                             <td><?= $pi['divisi']; ?></td>
                             <td>
-                                <a href="#" class="badge badge-success">Edit</a>
+                                <a href="<?= base_url(); ?>pic/edit/<?= $pi['id']; ?>" class="badge badge-success">Edit</a>
                                 <a href="<?= base_url(); ?>pic/delete/<?= $pi['id']; ?>" class="badge badge-danger">delete</a>
                             </td>
                         </tr>

@@ -64,23 +64,37 @@
                     <div class="form-group">
                         <div class="maxl">
                             <label class="radio inline">
-                                <input type="radio" name="gender" value="male" checked>
+                                <input type="radio" name="jk" value="jk" id="jk" checked>
                                 <span> Laki - Laki </span>
                             </label>
                             <label class="radio inline">
-                                <input type="radio" name="gender" value="female">
+                                <input type="radio" name="jk" value="jk" id="jk">
                                 <span> Perempuan </span>
                             </label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Semester" value="" />
+                        <select class="form-control">
+                            <option class="hidden" selected disabled>Semester</option>
+                            <option>1 Satu</option>
+                            <option>2 Dua</option>
+                            <option>3 Tiga</option>
+                            <option>4 Empat</option>
+                            <option>5 Lima</option>
+                            <option>6 Enam</option>
+                            <option>7 Tujuh</option>
+                            <option>8 Delapan</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Angkatan" value="" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Program Studi" value="" />
+                        <select class="form-control">
+                            <option class="hidden" selected disabled>Program Studi</option>
+                            <option>Teknik Informatika</option>
+                            <option>Sistem Informasi</option>
+                        </select>
                     </div>
 
                     <div class="form-group">

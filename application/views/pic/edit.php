@@ -5,12 +5,27 @@
     <div class="row">
         <div class="col-lg-8">
             <form action="" method='post'>
-                <input type="hidden" name="id" value="<?= $pic['id']; ?>">
                 <div class="form-group row">
-                    <label for="menu" class="col-sm-2 col-form-label">Menu</label>
+                    <label for="menu" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-7">
                         <input type="text" name="nama" class="form-control" id="nama" value="<?= $pic['nama']; ?>">
                         <small class="form-text text-danger"><?= form_error('pic'); ?></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="menu" class="col-sm-2 col-form-label">Divisi</label>
+                    <div class="col-sm-7">
+                        <input type="text" name="divisi" class="form-control" id="divisi" value="<?= $pic['divisi']; ?>">
+                        <small class="form-text text-danger"><?= form_error('pic'); ?></small>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="<?= $pic['id']; ?>">
+                <div class="form-group row">
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-7">
+
                     </div>
                 </div>
                 <div class="form-file row justify-content-end">

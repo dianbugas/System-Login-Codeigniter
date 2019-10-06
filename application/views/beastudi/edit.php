@@ -24,11 +24,11 @@
                     <label for="menu" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                     <div class="maxl col-sm-7">
                         <label class="radio inline">
-                            <input type="radio" name="gender" value="<?= $beastudi['jk']; ?>" checked>
+                            <input type="radio" name="jk" id="jk" value="<?= $beastudi['jk']; ?>">
                             <span> Laki - Laki </span>
                         </label>
                         <label class="radio inline">
-                            <input type="radio" name="gender" value="<?= $beastudi['jk']; ?>">
+                            <input type="radio" name="jk" id="jk" value="<?= $beastudi['jk']; ?>">
                             <span> Perempuan </span>
                         </label>
                     </div>

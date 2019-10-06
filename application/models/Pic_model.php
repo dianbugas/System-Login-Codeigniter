@@ -14,6 +14,17 @@ class Pic_model extends CI_Model
         return $this->db->get_where('pic', ['id' => $id])->row_array();
     }
 
+    public function editDataPic()
+    {
+        $data = [
+            "nama" => $this->input->post('nama', true),
+            "divisi" => $this->input->post('divisi', true)
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('pic', $data);
+    }
+
     public function deleteDataPicById($id)
     {
         $this->db->delete('pic', ['id' => $id]);

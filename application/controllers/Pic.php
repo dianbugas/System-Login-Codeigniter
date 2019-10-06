@@ -50,6 +50,28 @@ class Pic extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function edit($id)
+    {
+        $data['title'] = 'Edit Pic';
+        $data['pic'] = $this->Pic_model->getPicById($id);
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('divisi', 'Divisi', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('pic/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Pic_model->editDataPic($id);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
+            redirect('pic');
+        }
+    }
+
     public function delete($id)
     {
         $this->Pic_model->deleteDataPicById($id);

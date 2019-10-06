@@ -54,7 +54,7 @@ class Beastudi extends CI_Controller
 
     public function edit($id)
     {
-        $data['title'] = 'Edit Menu Management';
+        $data['title'] = 'Edit Data Beastudi';
         $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
