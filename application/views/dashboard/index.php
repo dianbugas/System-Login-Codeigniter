@@ -135,7 +135,12 @@
                                         <a href="<?= base_url(); ?>pic/" class="text-xs font-weight-bold text-warning text-uppercase mb-1">PIC</a>
                                     </div>
                                     <div>
-                                        <a href="<?= base_url(); ?>pic/" class="h5 mb-0 font-weight-bold text-gray-800">10</a>
+                                        <a href="<?= base_url(); ?>pic/" class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php $i = 1; ?>
+                                            <?php foreach ($pic as $pi) : ?>
+                                                <?= $i++; ?>
+                                            <?php endforeach; ?>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-auto">
