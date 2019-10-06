@@ -72,7 +72,13 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">kontribusi</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">40 beastudi</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($beastudi as $bea) : ?>
+                                            <?= $i++; ?>
+                                        <?php endforeach; ?>
+                                        beastudi
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>

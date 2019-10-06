@@ -32,9 +32,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-
         </div>
-
     </div>
 </div>
 <!-- /.container-fluid -->
@@ -54,10 +52,10 @@
             <form action="<?= base_url('pic'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Lengkap" value="nama" id="nama" />
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" id="nama" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Bagian / Divisi" value="divisi" id="divisi" />
+                        <input type="text" class="form-control" placeholder="Bagian / Divisi" name="divisi" id="divisi" />
                     </div>
                 </div>
                 <div class="modal-footer">
