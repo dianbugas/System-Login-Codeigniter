@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control">
+                        <select class="form-control" name="semester" value="semester" id="semester">
                             <option class="hidden" selected disabled>Semester</option>
                             <option>1 Satu</option>
                             <option>2 Dua</option>
@@ -87,18 +87,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Angkatan" value="" />
+                        <input type="number" maxlength="4" class="form-control" placeholder="Angkatan" value="angkatan" id="angkatan" name="angkatan" />
                     </div>
                     <div class="form-group">
                         <select class="form-control">
-                            <option class="hidden" selected disabled>Program Studi</option>
+                            <option class="hidden" id="programstudi" name="programstudi" selected disabled>Program Studi</option>
                             <option>Teknik Informatika</option>
                             <option>Sistem Informasi</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <select class="form-control">
+                        <select class="form-control" id="kontribusi" name="kontribusi">
                             <option class="hidden" selected disabled>Jenis Kontribusi</option>
                             <option>Content</option>
                             <option>Upload Content</option>

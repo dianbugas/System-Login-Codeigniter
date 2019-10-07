@@ -17,7 +17,15 @@ class Beastudi extends CI_Controller
         $data['title'] = 'Beastudi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['beastudi'] = $this->db->get('beastudi')->result_array();
-        $this->form_validation->set_rules('beastudi', 'Beastudi', 'required'); //name nya menu di index
+
+        // insert data
+        $this->form_validation->set_rules('nama', 'Nama', 'required'); //name nya menu di index
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
+        $this->form_validation->set_rules('angkatan', 'Angkatan', 'required');
+        $this->form_validation->set_rules('programstudi', 'Program Studi', 'required');
+        $this->form_validation->set_rules('kontribusi', 'Kontribusi', 'required');
+
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
