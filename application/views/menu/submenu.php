@@ -63,7 +63,7 @@
             <div class="form-group">
               <input type="text" class="form-control" id="title" name="title" placeholder="Submenu Title">
             </div>
-            <div class="form-group  ">
+            <div class="form-group">
               <select name="menu_id" id="menu_id" class="form-control">
                 <option value="">Select Menu</option>
                 <?php foreach ($menu as $m) : ?>

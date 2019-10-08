@@ -7,17 +7,22 @@
             <form action="" method='post'>
                 <input type="hidden" name="id" value="#">
                 <div class="form-group row">
-                    <label for="menu_id" class="col-sm-2 col-form-label">Menu Id</label>
-                    <div class="col-sm-7">
-                        <input type="text" name="menu_id" class="form-control" id="menu_id" value="#">
-                        <small class="form-text text-danger"><?= form_error('menu_id'); ?></small>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-7">
                         <input type="text" name="title" class="form-control" id="title" value="#">
                         <small class="form-text text-danger"><?= form_error('title'); ?></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="menu_id" class="col-sm-2 col-form-label">Menu</label>
+                    <div class="col-sm-7">
+                        <select name="menu_id" id="menu_id" class="form-control">
+                            <option value="">Select Menu</option>
+                            <?php foreach ($menu as $m) : ?>
+                                <option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <small class="form-text text-danger"><?= form_error('menu_id'); ?></small>
                     </div>
                 </div>
                 <div class="form-group row">

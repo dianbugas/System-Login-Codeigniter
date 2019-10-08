@@ -7,6 +7,7 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Menu_model');
+        $this->load->model('Submenu_model');
         $this->load->library('form_validation');
         // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
@@ -114,7 +115,7 @@ class Menu extends CI_Controller
     public function lengkap($id)
     {
         $data['title'] = 'Detail Data Menu';
-        $data['menu'] = $this->Menu_model->getSubMenuById($id);
+        $data['submenu'] = $this->Submenu_model->getSubMenuById($id);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -122,18 +123,16 @@ class Menu extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // juga masih erroorrrr belum bisa simpan ke databases;
     public function editsub()
     {
         $data['title'] = 'Edit Submenu Management';
         //$data['menu'] = $this->Menu_model->getSubMenuById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        // load submenu yg di bawah
         $this->load->model('Menu_model', 'menu');
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['menu'] = $this->menu->getSubMenu();
+        $data['subMenu'] = $this->menu->getSubMenu();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
@@ -155,7 +154,7 @@ class Menu extends CI_Controller
                 'icon' => $this->input->post('icon'),
                 'is_active' => $this->input->post('is_active')
             ];
-            $this->db->update('user_sub_menu', $data);
+            $this->db->update('user_sub_menu', $data);;
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
             redirect('menu/submenu');
         }

@@ -1,28 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Menu_model extends CI_Model
+class Submenu_model extends CI_Model
 {
-    //menu
-    public function getMenuById($id)
-    {
-        return $this->db->get_where('user_menu', ['id' => $id])->row_array();
-    }
-
-    public function editDataMenu()
-    {
-        $data = [
-            "menu" => $this->input->post('menu', true)
-        ];
-
-        $this->db->where('id', $this->input->post('id'));
-        $this->db->update('user_menu', $data);
-    }
-
-    public function deleteDataMenuById($id)
-    {
-        $this->db->delete('user_menu', ['id' => $id]);
-    }
 
     //submenu
     public function getSubMenu()
@@ -37,6 +17,20 @@ class Menu_model extends CI_Model
     public function getSubMenuById($id)
     {
         return $this->db->get_where('user_sub_menu', ['id' => $id])->row_array();
+    }
+
+    public function editDataSubMenu()
+    {
+        $data = [
+            'title' => $this->input->post('title'),
+            'menu_id' => $this->input->post('menu_id'),
+            'url' => $this->input->post('url'),
+            'icon' => $this->input->post('icon'),
+            'is_active' => $this->input->post('is_active')
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('user_sub_menu', $data);
     }
 
     public function hapusDataSubMenuById($id)
