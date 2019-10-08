@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <?= form_error('pic', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
-            <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newRoleModal">Tambah Data Pic</a>
+            <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newRoleModal">Tambah</a>
             <table class="table table-hover">
                 <thead>
                     <tr>

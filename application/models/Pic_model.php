@@ -29,4 +29,14 @@ class Pic_model extends CI_Model
     {
         $this->db->delete('pic', ['id' => $id]);
     }
+
+    public function hitungJumlahPic()
+    {
+        $query = $this->db->get('pic');
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
 }

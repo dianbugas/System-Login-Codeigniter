@@ -10,7 +10,7 @@
           <?= validation_errors(); ?>
         <?php endif; ?>
         <?= $this->session->flashdata('message'); ?>
-        <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
+        <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newSubMenuModal">Tambah</a>
         <table class="table table-hover">
           <thead>
             <tr>

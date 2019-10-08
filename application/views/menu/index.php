@@ -6,7 +6,7 @@
     <div class="col-lg-6">
       <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
       <?= $this->session->flashdata('message'); ?>
-      <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+      <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newMenuModal">Tambah</a>
       <table class="table table-hover">
         <thead>
           <tr>

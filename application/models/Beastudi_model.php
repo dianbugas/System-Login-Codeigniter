@@ -27,4 +27,14 @@ class Beastudi_model extends CI_Model
     {
         $this->db->delete('beastudi', ['id' => $id]);
     }
+
+    public function hitungJumlahBeastudi()
+    {
+        $query = $this->db->get('beastudi'); //beastudi /tabel
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
 }

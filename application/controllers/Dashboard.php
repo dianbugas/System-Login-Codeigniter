@@ -18,6 +18,9 @@ class Dashboard extends CI_Controller
         $data['title'] = 'Informasi';
         $data['beastudi'] = $this->Beastudi_model->getAllBeastudi();
         $data['pic'] = $this->Pic_model->getAllPic();
+        $data['total_pic'] = $this->Pic_model->hitungJumlahPic();
+        $data['total_beastudi'] = $this->Beastudi_model->hitungJumlahBeastudi();
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

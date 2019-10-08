@@ -73,10 +73,7 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">kontribusi</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        <?php $i = 1; ?>
-                                        <?php foreach ($beastudi as $bea) : ?>
-                                            <?= $i++; ?>
-                                        <?php endforeach; ?>
+                                        <?= $total_beastudi; ?>
                                         beastudi
                                     </div>
                                 </div>
@@ -142,10 +139,7 @@
                                     </div>
                                     <div>
                                         <a href="<?= base_url(); ?>pic/" class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <?php $i = 1; ?>
-                                            <?php foreach ($pic as $pi) : ?>
-                                                <?= $i++; ?>
-                                            <?php endforeach; ?>
+                                            <?= $total_pic; ?>
                                         </a>
                                     </div>
                                 </div>

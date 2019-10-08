@@ -16,7 +16,8 @@ class Beastudi extends CI_Controller
     {
         $data['title'] = 'Beastudi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['beastudi'] = $this->db->get('beastudi')->result_array();
+        // $data['beastudi'] = $this->db->get('beastudi')->result_array();
+        $data['beastudi'] = $this->Beastudi_model->getAllBeastudi();
 
         // insert data
         $this->form_validation->set_rules('nama', 'Nama', 'required'); //name nya menu di index
