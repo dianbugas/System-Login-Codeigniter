@@ -35,7 +35,8 @@
               <td><?= date('d F Y', $user['date_created']); ?></td>
               <td><img src="<?= base_url('assets/img/profile/') . $us['image']; ?>" class="img-circle" alt="..." width="40" height="40"></td>
               <td>
-                <a href="<?= base_url(); ?>admin/hapus/<?= $us['id']; ?>" class="badge badge-danger">delete</a>
+                <a href="<?= base_url(); ?>admin/editusers/<?= $us['id']; ?>" class="badge badge-success">edit</a>
+                <a href="<?= base_url(); ?>admin/hapus/<?= $us['id']; ?>" class="badge badge-danger">hapus</a>
               </td>
             </tr>
           <?php endforeach; ?>

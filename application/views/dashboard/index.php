@@ -1,68 +1,6 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col md-8">
-            <div class="card">
-                <div class="site-index">
-                    <div class="col-lg-12">
-                        <h5 class="page-header" align="center">
-                            <script type="text/javascript">
-                                var mydate = new Date()
-                                var year = mydate.getYear()
-                                if (year < 1000)
-                                    year += 1900
-                                var day = mydate.getDay()
-                                var month = mydate.getMonth()
-                                var daym = mydate.getDate()
-                                if (daym < 10)
-                                    daym = "0" + daym
-                                var dayarray = new
-                                Array("Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu")
-                                var montharray = new
-                                Array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember")
-                                document.write("" + dayarray[day] + ", " + daym + " " + montharray[month] + " " + year + "")
-                            </script>
-                            <div id="clock">
-                                <script type="text/javascript">
-                                    function showTime() {
-                                        var a_p = "";
-                                        var today = new Date();
-                                        var curr_hour = today.getHours();
-                                        var curr_minute = today.getMinutes();
-                                        var curr_second = today.getSeconds();
-                                        if (curr_hour < 12) {
-                                            a_p = "AM";
-                                        } else {
-                                            a_p = "PM";
-                                        }
-                                        if (curr_hour == 0) {
-                                            curr_hour = 24;
-                                        }
-                                        if (curr_hour > 24) {
-                                            curr_hour = curr_hour - 12;
-                                        }
-                                        curr_hour = checkTime(curr_hour);
-                                        curr_minute = checkTime(curr_minute);
-                                        curr_second = checkTime(curr_second);
-                                        document.getElementById('clock').innerHTML = curr_hour + ":" + curr_minute + ":" + curr_second + " " + a_p;
-                                    }
-
-                                    function checkTime(i) {
-                                        if (i < 10) {
-                                            i = "0" + i;
-                                        }
-                                        return i;
-                                    }
-                                    setInterval(showTime, 500);
-                                </script>
-                            </div>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col md-8">
             <div class="card-deck">
 
                 <!-- Earnings (Monthly) Card Example -->
@@ -168,6 +106,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">Pic</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Semester</th>
@@ -181,6 +120,7 @@
                         <?php foreach ($beastudi as $bs) : ?>
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
+                                <td><?= $bs['pic_id']; ?></td>
                                 <td><?= $bs['nama']; ?></td>
                                 <td><?= $bs['jk']; ?></td>
                                 <td><?= $bs['semester']; ?></td>
