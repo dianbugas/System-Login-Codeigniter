@@ -7,9 +7,21 @@
             <form action="" method='post'>
                 <input type="hidden" name="id" value="<?= $beastudi['id']; ?>">
                 <div class="form-group row">
+                    <label for="menu" class="col-sm-3 col-form-label">PIC</label>
+                    <div class="col-sm-7">
+                        <select name="menu_id" id="menu_id" class="form-control">
+                            <option value="">Select Menu</option>
+                            <?php foreach ($Pic as $p) : ?>
+                                <option value="<?= $p['id']; ?>"><?= $p['nama']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">Nama</label>
                     <div class="col-sm-7">
-                        <input type="text" name="menu" class="form-control" id="menu" value="<?= $beastudi['nama']; ?>">
+                        <input type="text" name="menu" class="form-control" id="menu" value="<?= $beastudi['nama_mh']; ?>">
                         <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                 </div>

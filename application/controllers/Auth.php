@@ -36,7 +36,7 @@ class Auth extends CI_Controller
 
         //ambil data user dari data base
         $user = $this->db->get_where('user', ['email' => $email])->row_array(); //row_array(untuk mendapatkan all baris);
-        
+
         //jika user ada
         if ($user) {
             //jika user aktif
@@ -48,7 +48,7 @@ class Auth extends CI_Controller
                         'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data); //disimpan ke dalam ssession data
-                    
+
                     //cek apakah login user atau admin (cek role_id admin atau user)
                     if ($user['role_id'] == 1) { // mengambil data dari baris 38
                         redirect('dashboard');
@@ -127,7 +127,7 @@ class Auth extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'ardiansyahbugas@gmail.com',
-            'smtp_pass' => '200616yhosi',
+            'smtp_pass' => '200616Ynf',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -195,7 +195,6 @@ class Auth extends CI_Controller
                     $this->db->delete('user_token', ['email' => $email]);
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' Akun anda telah diaktifkan! Silahkan login.</div>');
                     redirect('auth');
-
                 } else {
                     //kita hapus dulu data di dalam databse karena habis waktu untuk aktivasi
                     $this->db->delete('user', ['email' => $email]);
@@ -242,7 +241,7 @@ class Auth extends CI_Controller
             //cek di dalam data base ada atau tdk. dan di masukan ke dlm variabel $user
             //dan di tambah apakah user sudah aktiv
             $user = $this->db->get_where('user', ['email' => $email, 'is_active' => 1])->row_array();
-            
+
             //cek lagi apakah user ada
             if ($user) {
                 // siapkan token 
@@ -326,7 +325,7 @@ class Auth extends CI_Controller
     //     if (!empty($this->session->userdata('_login'))) {
     //         redirect('dashboard');
     //     }
-  
+
     //     # redirect ke auth url google
     //     $client = $this->get_google_client();
     //     $auth_url = $client->createAuthUrl();
@@ -342,11 +341,11 @@ class Auth extends CI_Controller
 
     //     $client = $this->get_google_client();
     //     $client->authenticate($_GET['code']);
- 
+
     // # ambil profilenya
     //     $plus = new Google_Service_Plus($client);
     //     $profile = $plus->people->get("me");
-     
+
     // # cek dulu sudah ada belum
     //     $user = $this->AuthModel->retrieve("", $profile['emails'][0]['value']);
     // # jika belum ada, simpan

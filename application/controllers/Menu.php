@@ -123,22 +123,23 @@ class Menu extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function editsub()
+    public function editsub($id)
     {
         $data['title'] = 'Edit Submenu Management';
-        //$data['menu'] = $this->Menu_model->getSubMenuById($id);
+        $data['submenu'] = $this->Submenu_model->getSubMenuById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->load->model('Menu_model', 'menu');
+        $this->load->model('Submenu_model', 'submenu');
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['subMenu'] = $this->menu->getSubMenu();
-        $data['menu'] = $this->db->get('user_menu')->result_array();
+        $data['subMenu'] = $this->submenu->getSubMenu();
+        $data['submenu'] = $this->db->get('user_sub_menu')->result_array();
 
         $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
         $this->form_validation->set_rules('menu_id', 'Menu', 'required');
         $this->form_validation->set_rules('url', 'URL', 'required');
         $this->form_validation->set_rules('icon', 'Icon', 'required');
+        $this->form_validation->set_rules('is_active', 'Verifikasi Aktif', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -147,14 +148,7 @@ class Menu extends CI_Controller
             $this->load->view('menu/editsub', $data);
             $this->load->view('templates/footer');
         } else {
-            $data = [
-                'title' => $this->input->post('title'),
-                'menu_id' => $this->input->post('menu_id'),
-                'url' => $this->input->post('url'),
-                'icon' => $this->input->post('icon'),
-                'is_active' => $this->input->post('is_active')
-            ];
-            $this->db->update('user_sub_menu', $data);;
+            $this->Submenu_model->editDataSubMenu($id);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
             redirect('menu/submenu');
         }

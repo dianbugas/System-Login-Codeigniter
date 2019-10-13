@@ -106,7 +106,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Pic</th>
+                            <th scope="col">PIC</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Semester</th>
@@ -117,11 +117,11 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        <?php foreach ($beastudi as $bs) : ?>
+                        <?php foreach ($subBeastudi as $bs) : ?>
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>
-                                <td><?= $bs['pic_id']; ?></td>
                                 <td><?= $bs['nama']; ?></td>
+                                <td><?= $bs['nama_mh']; ?></td>
                                 <td><?= $bs['jk']; ?></td>
                                 <td><?= $bs['semester']; ?></td>
                                 <td><?= $bs['angkatan']; ?></td>

@@ -16,10 +16,16 @@ class Dashboard extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Informasi';
-        $data['beastudi'] = $this->Beastudi_model->getAllBeastudi();
         $data['pic'] = $this->Pic_model->getAllPic();
         $data['total_pic'] = $this->Pic_model->hitungJumlahPic();
         $data['total_beastudi'] = $this->Beastudi_model->hitungJumlahBeastudi();
+
+        //beastudi
+        $this->load->model('Beastudi_model', 'nama');
+        //query submenu
+        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        $data['subBeastudi'] = $this->nama->getBeastudi();
+        $data['beastudi'] = $this->db->get('beastudi')->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

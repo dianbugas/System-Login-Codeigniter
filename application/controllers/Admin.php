@@ -112,10 +112,10 @@ class Admin extends CI_Controller
     // khusus admin
     public function editusers()
     {
-        $data['title'] = 'Edit Data';
+        $data['title'] = 'Edit Data Users';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->form_validation->set_rules('name', 'Full name', 'required|trim');
+        $this->form_validation->set_rules('role_id', 'Role Id', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -124,9 +124,8 @@ class Admin extends CI_Controller
             $this->load->view('user/editusers', $data);
             $this->load->view('templates/footer');
         } else {
-            $name = $this->input->post('name');
+            $role_id = $this->input->post('role_id');
             $email = $this->input->post('email');
-            $role = $this->input->post('role_id');
 
             //cek jika ada gambar yang akan  diupload
             $upload_image = $_FILES['image']['name'];
@@ -156,12 +155,12 @@ class Admin extends CI_Controller
                 };
             }
 
-            $this->db->set('name', $name);
+            $this->db->set('role_id', $role_id);
             $this->db->where('email', $email);
             $this->db->update('user');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil Anda telah diperbarui!</div>');
-            redirect('user');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil User telah diperbarui!</div>');
+            redirect('admin/users');
         }
     }
 

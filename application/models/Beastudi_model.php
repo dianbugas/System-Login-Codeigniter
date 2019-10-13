@@ -13,10 +13,39 @@ class Beastudi_model extends CI_Model
         return $this->db->get_where('beastudi', ['id' => $id])->row_array();
     }
 
+    public function getBeastudi()
+    {
+        $query = "SELECT `beastudi`.*, `pic`.`nama`
+                  FROM `beastudi` JOIN `pic`
+                  ON `beastudi`.`pic_id` = `pic`.`id`
+                ";
+        return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
+    }
+
+    //error
+    public function tambahDataBeastudi()
+    {
+        $data = [
+            "nama_mh" => $this->input->post('nama_mh', true),
+            "jk" => $this->input->post('jk', true),
+            "semester" => $this->input->post('semester', true),
+            "angkatan" => $this->input->post('angkatan', true),
+            "programstudi" => $this->input->post('programstudi', true),
+            "kontribusi" => $this->input->post('kontribusi', true)
+        ];
+        $this->db->insert('beastudi ', $data);
+    }
+
     public function editDataBeastudi()
     {
         $data = [
-            "nama" => $this->input->post('nama', true)
+            "pic_id" => $this->input->post('pic_id', true),
+            "nama_mh" => $this->input->post('nama_mh', true),
+            "jk" => $this->input->post('jk', true),
+            "semester" => $this->input->post('semester', true),
+            "angkatan" => $this->input->post('angkatan', true),
+            "programstudi" => $this->input->post('programstudi', true),
+            "kontribusi" => $this->input->post('kontribusi', true)
         ];
 
         $this->db->where('id', $this->input->post('id'));

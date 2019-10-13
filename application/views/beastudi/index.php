@@ -7,11 +7,12 @@
         <div class="col-lg-12">
             <?= form_error('pic', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
-            <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newRoleModal">Tambah</a>
+            <a href="<?= base_url(); ?>beastudi/tambah" class="btn btn-primary">Tambah Data</a>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">PIC</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Jenis Kelamin</th>
                         <th scope="col">Semester</th>
@@ -23,10 +24,11 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($beastudi as $bs) : ?>
+                    <?php foreach ($subBeastudi as $bs) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
                             <td><?= $bs['nama']; ?></td>
+                            <td><?= $bs['nama_mh']; ?></td>
                             <td><?= $bs['jk']; ?></td>
                             <td><?= $bs['semester']; ?></td>
                             <td><?= $bs['angkatan']; ?></td>
@@ -62,7 +64,12 @@
                         <small class="form-text text-danger"><?= form_error('nama'); ?></small>
                     </div>
                     <div class="form-group">
-                        <div class="maxl">
+                        <select class="form-control" name="semester" value="semester" id="semester">
+                            <option class="hidden" selected disabled>Jenis Kelamin</option>
+                            <option>Laki-Laki</option>
+                            <option>Perempuan</option>
+                        </select>
+                        <!-- <div class="maxl">
                             <label class="radio inline">
                                 <input type="radio" name="jk" value="jk" id="jk" checked>
                                 <span> Laki - Laki </span>
@@ -71,7 +78,7 @@
                                 <input type="radio" name="jk" value="jk" id="jk">
                                 <span> Perempuan </span>
                             </label>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="semester" value="semester" id="semester">
@@ -95,6 +102,12 @@
                             <option>Teknik Informatika</option>
                             <option>Sistem Informasi</option>
                         </select>
+                        <!-- <select class="form-control" name="beastudi" id="beastudi" required>
+                            <option selected disabled>Program Studi</option>
+                            <?php foreach ($beastudi as $beas) : ?>
+                                <option value="<?= $beas->programstudi; ?>"><?= $beas->programstudi; ?></option>
+                            <?php endforeach; ?>
+                        </select> -->
                     </div>
 
                     <div class="form-group">
