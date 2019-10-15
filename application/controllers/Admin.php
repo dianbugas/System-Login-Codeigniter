@@ -109,10 +109,11 @@ class Admin extends CI_Controller
         }
     }
 
-    // khusus admin
-    public function editusers()
+    // khusus admin masih error
+    public function editusers($id)
     {
         $data['title'] = 'Edit Data Users';
+        $data['user'] = $this->User_model->getUserById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->form_validation->set_rules('role_id', 'Role Id', 'required|trim');
@@ -128,32 +129,32 @@ class Admin extends CI_Controller
             $email = $this->input->post('email');
 
             //cek jika ada gambar yang akan  diupload
-            $upload_image = $_FILES['image']['name'];
+            // $upload_image = $_FILES['image']['name'];
 
-            if ($upload_image) {
-                $config['upload_path'] = './assets/img/profile/';
-                $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max_size'] = '4048'; //ukuran gambar
+            // if ($upload_image) {
+            //     $config['upload_path'] = './assets/img/profile/';
+            //     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            //     $config['max_size'] = '4048'; //ukuran gambar
 
-                $this->load->library('upload', $config);
+            //     $this->load->library('upload', $config);
 
-                if ($this->upload->do_upload('image')) {
-                    //cek gambar lama ngambil dari variabel data
-                    $old_image = $data['user']['image'];
-                    //cek gambar defaul bukan
-                    if ($old_image != 'default.jpg') {
-                        //ganti gambar baru
-                        unlink(FCPATH . 'assets/img/profile/' . $old_image);
-                    }
+            //     if ($this->upload->do_upload('image')) {
+            //         //cek gambar lama ngambil dari variabel data
+            //         $old_image = $data['user']['image'];
+            //         //cek gambar defaul bukan
+            //         if ($old_image != 'default.jpg') {
+            //             //ganti gambar baru
+            //             unlink(FCPATH . 'assets/img/profile/' . $old_image);
+            //         }
 
-                    // berisi nama file baru yg mau di masukan di baris ke 70. klu ada gambarnya maka bertambah
-                    $new_image = $this->upload->data('file_name');
-                    //klu ga ada gambar maka perintah ini tdk akan di set
-                    $this->db->set('image', $new_image);
-                } else {
-                    echo $this->upload->display_errors();
-                };
-            }
+            //         // berisi nama file baru yg mau di masukan di baris ke 70. klu ada gambarnya maka bertambah
+            //         $new_image = $this->upload->data('file_name');
+            //         //klu ga ada gambar maka perintah ini tdk akan di set
+            //         $this->db->set('image', $new_image);
+            //     } else {
+            //         echo $this->upload->display_errors();
+            //     };
+            // }
 
             $this->db->set('role_id', $role_id);
             $this->db->where('email', $email);
