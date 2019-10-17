@@ -139,7 +139,6 @@ class Menu extends CI_Controller
         $this->form_validation->set_rules('menu_id', 'Menu', 'required');
         $this->form_validation->set_rules('url', 'URL', 'required');
         $this->form_validation->set_rules('icon', 'Icon', 'required');
-        $this->form_validation->set_rules('is_active', 'Verifikasi Aktif', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -148,8 +147,8 @@ class Menu extends CI_Controller
             $this->load->view('menu/editsub', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Submenu_model->editDataSubMenu($id);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu baru ditambahkan!</div>');
+            $this->Menu_model->editDataSubMenu($id);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu berhasil di ubah!</div>');
             redirect('menu/submenu');
         }
     }
