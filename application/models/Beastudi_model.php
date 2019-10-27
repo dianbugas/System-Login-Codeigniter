@@ -31,7 +31,8 @@ class Beastudi_model extends CI_Model
             "semester" => $this->input->post('semester', true),
             "angkatan" => $this->input->post('angkatan', true),
             "programstudi" => $this->input->post('programstudi', true),
-            "kontribusi" => $this->input->post('kontribusi', true)
+            "kontribusi" => $this->input->post('kontribusi', true),
+            "pic_id" => $this->input->post('pic_id', true)
         ];
         $this->db->insert('beastudi ', $data);
     }
@@ -39,13 +40,13 @@ class Beastudi_model extends CI_Model
     public function editDataBeastudi()
     {
         $data = [
-            "pic_id" => $this->input->post('pic_id', true),
             "nama_mh" => $this->input->post('nama_mh', true),
             "jk" => $this->input->post('jk', true),
             "semester" => $this->input->post('semester', true),
             "angkatan" => $this->input->post('angkatan', true),
             "programstudi" => $this->input->post('programstudi', true),
-            "kontribusi" => $this->input->post('kontribusi', true)
+            "kontribusi" => $this->input->post('kontribusi', true),
+            "pic_id" => $this->input->post('pic_id', true)
         ];
 
         $this->db->where('id', $this->input->post('id'));

@@ -5,9 +5,9 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
         <div class="col-lg-12">
-            <?= form_error('pic', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+            <?= form_error('beastudi', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
-            <a href="<?= base_url(); ?>beastudi/tambah" class="btn btn-primary">Tambah Data</a>
+            <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#newRoleModal">Tambah</a>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -60,25 +60,26 @@
             <form action="<?= base_url('beastudi'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
-                        <small class="form-text text-danger"><?= form_error('nama'); ?></small>
+                        <select name="menu_id" id="menu_id" class="form-control">
+                            <option value="">Select Menu</option>
+                            <?php foreach ($Pic as $p) : ?>
+                                <option value="<?= $p['id']; ?>"><?= $p['nama']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="semester" value="semester" id="semester">
-                            <option class="hidden" selected disabled>Jenis Kelamin</option>
-                            <option>Laki-Laki</option>
-                            <option>Perempuan</option>
-                        </select>
-                        <!-- <div class="maxl">
-                            <label class="radio inline">
-                                <input type="radio" name="jk" value="jk" id="jk" checked>
-                                <span> Laki - Laki </span>
-                            </label>
-                            <label class="radio inline">
-                                <input type="radio" name="jk" value="jk" id="jk">
-                                <span> Perempuan </span>
-                            </label>
-                        </div> -->
+                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
+                        <small class="form-text text-danger"><?= form_error('nama_mh'); ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio inline">
+                            <input type="radio" name="jk" value="l" checked>
+                            <span> Laki - Laki </span>
+                        </label>
+                        <label class="radio inline">
+                            <input type="radio" name="jk" value="p">
+                            <span> Perempuan </span>
+                        </label>
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="semester" value="semester" id="semester">
@@ -92,9 +93,11 @@
                             <option>7 Tujuh</option>
                             <option>8 Delapan</option>
                         </select>
+                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                     <div class="form-group">
                         <input type="number" maxlength="4" class="form-control" placeholder="Angkatan" value="angkatan" id="angkatan" name="angkatan" />
+                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                     <div class="form-group">
                         <select class="form-control">
@@ -102,14 +105,8 @@
                             <option>Teknik Informatika</option>
                             <option>Sistem Informasi</option>
                         </select>
-                        <!-- <select class="form-control" name="beastudi" id="beastudi" required>
-                            <option selected disabled>Program Studi</option>
-                            <?php foreach ($beastudi as $beas) : ?>
-                                <option value="<?= $beas->programstudi; ?>"><?= $beas->programstudi; ?></option>
-                            <?php endforeach; ?>
-                        </select> -->
+                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
-
                     <div class="form-group">
                         <select class="form-control" id="kontribusi" name="kontribusi">
                             <option class="hidden" selected disabled>Jenis Kontribusi</option>
@@ -122,11 +119,12 @@
                             <option>Inkubator</option>
                             <option>LPMI</option>
                         </select>
+                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
                 </div>
             </form>
         </div>

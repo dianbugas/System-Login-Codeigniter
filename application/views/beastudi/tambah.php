@@ -7,6 +7,17 @@
             <form action="" method='post'>
                 <input type="hidden" name="id">
                 <div class="form-group row">
+                    <label for="pic_id" class="col-sm-3 col-form-label">PIC</label>
+                    <div class="col-sm-7">
+                        <select name="menu_id" id="menu_id" class="form-control">
+                            <option value="">Select Menu</option>
+                            <?php foreach ($Pic as $p) : ?>
+                                <option value="<?= $p['id']; ?>"><?= $p['nama']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">Nama</label>
                     <div class="col-sm-7">
                         <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
@@ -16,11 +27,14 @@
                 <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-7">
-                        <select class="form-control" name="jk" value="jk" id="jk">
-                            <option class="hidden" selected disabled>Jenis Kelamin</option>
-                            <option>Laki-Laki</option>
-                            <option>Perempuan</option>
-                        </select>
+                        <label class="radio inline">
+                            <input type="radio" name="jk" value="l" checked>
+                            <span> Laki - Laki </span>
+                        </label>
+                        <label class="radio inline">
+                            <input type="radio" name="jk" value="p">
+                            <span> Perempuan </span>
+                        </label>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -63,9 +77,14 @@
                     <div class="col-sm-7">
                         <select class="form-control" id="kontribusi" name="kontribusi">
                             <option class="hidden" selected disabled>Jenis Kontribusi</option>
-                            <?php foreach ($beastudi as $beas) : ?>
-                                <option value="<?= $beas->kontribusi; ?>"><?php echo $beas->kontribusi; ?></option>
-                            <?php endforeach; ?>
+                            <option>Content</option>
+                            <option>Upload Content</option>
+                            <option>Website Developer</option>
+                            <option>Design Graphic</option>
+                            <option>Video Content</option>
+                            <option>LPPM</option>
+                            <option>Inkubator</option>
+                            <option>LPMI</option>
                         </select>
                         <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>

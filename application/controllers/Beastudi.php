@@ -25,27 +25,33 @@ class Beastudi extends CI_Controller
         $data['subBeastudi'] = $this->nama->getBeastudi();
         $data['beastudi'] = $this->db->get('beastudi')->result_array();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('beastudi/index', $data);
-        $this->load->view('templates/footer');
-        //     } else {
-        //         //insert ke tabel menu(tambah) dan di ambil dari inputan
-        //         $data = [
-        //             'nama' => $this->input->post('nama'),
-        //             'jk' => $this->input->post('jk'),
-        //             'semester' => $this->input->post('semester'),
-        //             'angkatan' => $this->input->post('angkatan'),
-        //             'programstudi' => $this->input->post('programstudi'),
-        //             'kontribusi' => $this->input->post('kontribusi')
-        //         ];
-        //         $this->db->insert('beastudi', $data);
-        //         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu baru ditambahkan!</div>');
-        //         //$this->session->set_flashdata('flash', 'Ditambahkan');
-        //         redirect('beastudi');
-        //     }
-        // }
+        //untuk join table
+        $this->load->model('Beastudi_model', 'pic');
+        //query submenu
+        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        $data['Pic'] = $this->pic->getBeastudi();
+        $data['pic'] = $this->db->get('beastudi')->result_array();
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('beastudi/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //insert ke tabel menu(tambah) dan di ambil dari inputan
+            $data = [
+                'nama' => $this->input->post('nama'),
+                'jk' => $this->input->post('jk'),
+                'semester' => $this->input->post('semester'),
+                'angkatan' => $this->input->post('angkatan'),
+                'programstudi' => $this->input->post('programstudi'),
+                'kontribusi' => $this->input->post('kontribusi')
+            ];
+            $this->db->insert('beastudi', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu baru ditambahkan!</div>');
+            //$this->session->set_flashdata('flash', 'Ditambahkan');
+            redirect('beastudi');
+        }
     }
 
     public function tambah()
@@ -53,6 +59,11 @@ class Beastudi extends CI_Controller
         $data['title'] = 'Tambah Data Beastudi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
+        $this->load->model('Beastudi_model', 'pic');
+        //query submenu
+        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        $data['Pic'] = $this->pic->getBeastudi();
+        $data['pic'] = $this->db->get('beastudi')->result_array();
         // insert data
         $this->form_validation->set_rules('nama', 'Nama', 'required'); //name nya menu di index
         $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
@@ -69,7 +80,7 @@ class Beastudi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Beastudi_model->tambahDataBeastudi();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi Berhasil di tambah!</div>');
             redirect('beastudi');
         }
     }
@@ -112,8 +123,8 @@ class Beastudi extends CI_Controller
             $this->load->view('beastudi/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Menu_model->editDataBeastudi($id);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu Berhasil di Edit!</div>');
+            $this->Beastudi_model->editDataBeastudi($id);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');
             redirect('beastudi');
         }
     }

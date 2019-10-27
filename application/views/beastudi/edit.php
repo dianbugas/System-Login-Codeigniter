@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-8">
             <form action="" method='post'>
-                <input type="hidden" name="id" value="<?= $beastudi['id']; ?>">
+                <!-- <input type="hidden" name="id" value="<?= $beastudi['id']; ?>"> -->
                 <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">PIC</label>
                     <div class="col-sm-7">
@@ -32,7 +32,7 @@
                         <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                     <div class="maxl col-sm-7">
                         <label class="radio inline">
@@ -44,7 +44,7 @@
                             <span> Perempuan </span>
                         </label>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">Semester</label>
                     <div class="col-sm-7">
