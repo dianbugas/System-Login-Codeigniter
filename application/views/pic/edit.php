@@ -20,14 +20,6 @@
                     </div>
                 </div>
                 <input type="hidden" name="id" value="<?= $pic['id']; ?>">
-                <div class="form-group row">
-
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-
-                    </div>
-                </div>
                 <div class="form-file row justify-content-end">
                     <div class="col-sm-10">
                         <button type="submit" name="edit" class="btn btn-primary">Edit</button>
