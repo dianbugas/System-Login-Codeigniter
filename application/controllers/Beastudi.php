@@ -17,20 +17,20 @@ class Beastudi extends CI_Controller
         $data['title'] = 'Beastudi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         // $data['beastudi'] = $this->db->get('beastudi')->result_array();
-        $data['beastudi'] = $this->Beastudi_model->getAllBeastudi();
-
-        $this->load->model('Beastudi_model', 'nama');
-        //query submenu
-        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['subBeastudi'] = $this->nama->getBeastudi();
-        $data['beastudi'] = $this->db->get('beastudi')->result_array();
+        //$data['beastudi'] = $this->Beastudi_model->getAllBeastudi();
 
         //untuk join table
         $this->load->model('Beastudi_model', 'pic');
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['Pic'] = $this->pic->getBeastudi();
-        $data['pic'] = $this->db->get('beastudi')->result_array();
+        $data['beastudi'] = $this->pic->getBeastudi();
+        $data['pic'] = $this->db->get('pic')->result_array();
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('perusahaan', 'Perusahaan', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('dana', 'Dana');
+
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -48,7 +48,7 @@ class Beastudi extends CI_Controller
                 'kontribusi' => $this->input->post('kontribusi')
             ];
             $this->db->insert('beastudi', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu baru ditambahkan!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi baru ditambahkan!</div>');
             //$this->session->set_flashdata('flash', 'Ditambahkan');
             redirect('beastudi');
         }

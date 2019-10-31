@@ -26,7 +26,7 @@
                             <td><?= $da['nama_donatur']; ?></td>
                             <td><?= $da['perusahaan']; ?></td>
                             <td><?= $da['alamat']; ?></td>
-                            <td><?= $da['dana']; ?></td>
+                            <td>Rp <?= $da['dana']; ?></td>
                             <td>
                                 <a href="<?= base_url(); ?>dana/edit/<?= $da['id']; ?>" class="badge badge-success">Edit</a>
                                 <a href="<?= base_url(); ?>dana/delete/<?= $da['id']; ?>" class="badge badge-danger">delete</a>
@@ -55,7 +55,7 @@
             <form action="<?= base_url('dana'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nama Lengkap Donatur" name="nama_donatur" id="nama_donatur" />
+                        <input type="text" class="form-control" placeholder="Nama Donatur" name="nama_donatur" id="nama_donatur" />
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Perusahaan" name="perusahaan" id="perusahaan" />
@@ -64,7 +64,16 @@
                         <input type="text" class="form-control" placeholder="Alamat" name="alamat" id="alamat" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Dana" name="dana" id="dana" />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="validationTooltipUsernamePrepend">Rp</span>
+                            </div>
+                            <input type="text" class="form-control" name="dana" id="rupiah" placeholder="Nominal Dana" aria-describedby="validationTooltipUsernamePrepend">
+                            <small class="form-text text-danger"><?= form_error('dana'); ?></small>
+                            <div class="invalid-tooltip">
+                                Please choose a unique and valid username.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

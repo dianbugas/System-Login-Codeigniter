@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($subBeastudi as $bs) : ?>
+                    <?php foreach ($beastudi as $bs) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
                             <td><?= $bs['nama']; ?></td>
