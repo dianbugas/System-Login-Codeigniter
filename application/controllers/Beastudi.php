@@ -7,6 +7,8 @@ class Beastudi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Beastudi_model');
+        $this->load->model('Pic_model');
+
         $this->load->library('form_validation');
         // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
@@ -16,20 +18,20 @@ class Beastudi extends CI_Controller
     {
         $data['title'] = 'Beastudi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        // $data['beastudi'] = $this->db->get('beastudi')->result_array();
-        //$data['beastudi'] = $this->Beastudi_model->getAllBeastudi();
 
-        //untuk join table
         $this->load->model('Beastudi_model', 'pic');
-        //query submenu
+        //query submenu 
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
         $data['beastudi'] = $this->pic->getBeastudi();
         $data['pic'] = $this->db->get('pic')->result_array();
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('perusahaan', 'Perusahaan', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('dana', 'Dana');
+        $this->form_validation->set_rules('nama_mh', 'Nama', 'required'); //name nya menu di index
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin');
+        $this->form_validation->set_rules('semester', 'Semester');
+        $this->form_validation->set_rules('angkatan', 'Angkatan');
+        $this->form_validation->set_rules('programstudi', 'Program Studi');
+        $this->form_validation->set_rules('kontribusi', 'Kontribusi');
+        $this->form_validation->set_rules('pic_id', 'PIC');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -40,14 +42,16 @@ class Beastudi extends CI_Controller
         } else {
             //insert ke tabel menu(tambah) dan di ambil dari inputan
             $data = [
-                'nama' => $this->input->post('nama'),
+                'nama_mh' => $this->input->post('nama_mh'),
                 'jk' => $this->input->post('jk'),
                 'semester' => $this->input->post('semester'),
                 'angkatan' => $this->input->post('angkatan'),
                 'programstudi' => $this->input->post('programstudi'),
-                'kontribusi' => $this->input->post('kontribusi')
+                'kontribusi' => $this->input->post('kontribusi'),
+                'pic_id' => $this->input->post('pic_id')
             ];
-            $this->db->insert('beastudi', $data);
+
+            $this->db->insert('beastudi ', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi baru ditambahkan!</div>');
             //$this->session->set_flashdata('flash', 'Ditambahkan');
             redirect('beastudi');
@@ -62,15 +66,16 @@ class Beastudi extends CI_Controller
         $this->load->model('Beastudi_model', 'pic');
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['Pic'] = $this->pic->getBeastudi();
+        $data['beastudi'] = $this->pic->getBeastudi();
         $data['pic'] = $this->db->get('beastudi')->result_array();
         // insert data
-        $this->form_validation->set_rules('nama', 'Nama', 'required'); //name nya menu di index
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
-        $this->form_validation->set_rules('semester', 'Semester', 'required');
-        $this->form_validation->set_rules('angkatan', 'Angkatan', 'required');
-        $this->form_validation->set_rules('programstudi', 'Program Studi', 'required');
-        $this->form_validation->set_rules('kontribusi', 'Kontribusi', 'required');
+        $this->form_validation->set_rules('nama_mh', 'Nama', 'required'); //name nya menu di index
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin');
+        $this->form_validation->set_rules('semester', 'Semester');
+        $this->form_validation->set_rules('angkatan', 'Angkatan');
+        $this->form_validation->set_rules('programstudi', 'Program Studi');
+        $this->form_validation->set_rules('kontribusi', 'Kontribusi');
+        $this->form_validation->set_rules('pic_id', 'PIC');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -79,7 +84,17 @@ class Beastudi extends CI_Controller
             $this->load->view('beastudi/tambah', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Beastudi_model->tambahDataBeastudi();
+            $data = [
+                'nama_mh' => $this->input->post('nama_mh'),
+                'jk' => $this->input->post('jk'),
+                'semester' => $this->input->post('semester'),
+                'angkatan' => $this->input->post('angkatan'),
+                'programstudi' => $this->input->post('programstudi'),
+                'kontribusi' => $this->input->post('kontribusi'),
+                'pic_id' => $this->input->post('pic_id')
+            ];
+
+            $this->db->insert('beastudi ', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi Berhasil di tambah!</div>');
             redirect('beastudi');
         }
@@ -105,8 +120,8 @@ class Beastudi extends CI_Controller
         $this->load->model('Beastudi_model', 'pic');
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['Pic'] = $this->pic->getBeastudi();
-        $data['pic'] = $this->db->get('beastudi')->result_array();
+        $data['bbeastudi'] = $this->pic->getBeastudi();
+        $data['pic'] = $this->db->get('pic')->result_array();
 
         $this->form_validation->set_rules('pic_id', 'PIC', 'required');
         $this->form_validation->set_rules('nama_mh', 'nama_mh', 'required');

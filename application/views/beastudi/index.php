@@ -1,6 +1,5 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
@@ -45,6 +44,8 @@
         </div>
     </div>
 </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="newRoleModal" tabindex="-1" role="dialog" aria-labelledby="newRoleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -62,14 +63,13 @@
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
                             <option value="">Select Menu</option>
-                            <?php foreach ($Pic as $p) : ?>
+                            <?php foreach ($beastudi as $p) : ?>
                                 <option value="<?= $p['id']; ?>"><?= $p['nama']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
-                        <small class="form-text text-danger"><?= form_error('nama_mh'); ?></small>
                     </div>
                     <div class="form-group">
                         <label class="radio inline">
@@ -93,11 +93,9 @@
                             <option>7 Tujuh</option>
                             <option>8 Delapan</option>
                         </select>
-                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                     <div class="form-group">
                         <input type="number" maxlength="4" class="form-control" placeholder="Angkatan" value="angkatan" id="angkatan" name="angkatan" />
-                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                     <div class="form-group">
                         <select class="form-control">
@@ -105,7 +103,6 @@
                             <option>Teknik Informatika</option>
                             <option>Sistem Informasi</option>
                         </select>
-                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                     <div class="form-group">
                         <select class="form-control" id="kontribusi" name="kontribusi">
@@ -119,7 +116,6 @@
                             <option>Inkubator</option>
                             <option>LPMI</option>
                         </select>
-                        <small class="form-text text-danger"><?= form_error('menu'); ?></small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
@@ -129,29 +125,4 @@
             </form>
         </div>
     </div>
-</div>
-</div>
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"></h1>
-    <div class="container register">
-        <div class="row">
-            <div class="col-md-9 register-right">
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row register-form">
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.container-fluid -->
-</div>
 </div>

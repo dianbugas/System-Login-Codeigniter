@@ -126,14 +126,14 @@ class Menu extends CI_Controller
     public function editsub($id)
     {
         $data['title'] = 'Edit Submenu Management';
-        $data['submenu'] = $this->Submenu_model->getSubMenuById($id);
+        $data['submenu'] = $this->Submenu_model->getSubMenuById($id); //untuk view edit
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->load->model('Submenu_model', 'submenu');
+        $this->load->model('Menu_model', 'menu');
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['subMenu'] = $this->submenu->getSubMenu();
-        $data['submenu'] = $this->db->get('user_sub_menu')->result_array();
+        $data['subMenu'] = $this->menu->getSubMenu();  // untuk view join
+        $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
         $this->form_validation->set_rules('menu_id', 'Menu', 'required');

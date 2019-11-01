@@ -5,13 +5,12 @@
     <div class="row">
         <div class="col-lg-8">
             <form action="" method='post'>
-                <!-- <input type="hidden" name="id" value="<?= $beastudi['id']; ?>"> -->
                 <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">PIC</label>
                     <div class="col-sm-7">
-                        <select name="menu_id" id="menu_id" class="form-control">
-                            <option value="">Select Menu</option>
-                            <?php foreach ($Pic as $p) : ?>
+                        <select name="pic_id" id="pic_id" class="form-control">
+                            <option value="<?= $beastudi['pic_id']; ?>">Select Menu</option>
+                            <?php foreach ($bbeastudi as $p) : ?>
                                 <option value="<?= $p['id']; ?>"><?= $p['nama']; ?></option>
                             <?php endforeach; ?>
                         </select>

@@ -5,11 +5,10 @@
     <div class="row">
         <div class="col-lg-8">
             <form action="<?php base_url('menu/submenu'); ?>" method="post">
-                <h3 style="color:red">MASIH ERROR</h3>
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-7">
-                        <input type="text" name="title" class="form-control" id="title" value="#">
+                        <input type="text" name="title" class="form-control" id="title" value="<?= $submenu['title']; ?>">
                         <small class="form-text text-danger"><?= form_error('title'); ?></small>
                     </div>
                 </div>
@@ -28,21 +27,21 @@
                 <div class="form-group row">
                     <label for="url" class="col-sm-2 col-form-label">Url</label>
                     <div class="col-sm-7">
-                        <input type="text" name="url" class="form-control" id="url" value="#">
+                        <input type="text" name="url" class="form-control" id="url" value="<?= $submenu['url']; ?>">
                         <small class="form-text text-danger"><?= form_error('url'); ?></small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="icon" class="col-sm-2 col-form-label">Icon</label>
                     <div class="col-sm-7">
-                        <input type="text" name="icon" class="form-control" id="icon" value="#">
+                        <input type="text" name="icon" class="form-control" id="icon" value="<?= $submenu['icon']; ?>">
                         <small class="form-text text-danger"><?= form_error('icon'); ?></small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="is_active" class="col-sm-2 col-form-label">Is Active</label>
                     <div class="col-sm-7">
-                        <input type="text" name="is_active" class="form-control" id="is_active" value="#">
+                        <input type="text" name="is_active" class="form-control" id="is_active" value="<?= $submenu['is_active']; ?>">
                         <small class="form-text text-danger"><?= form_error('is_active'); ?></small>
                     </div>
                 </div>

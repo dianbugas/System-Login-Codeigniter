@@ -84,16 +84,3 @@
         </div>
     </div>
 </div>
-</div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        // Format mata uang.
-        $('.uang').mask('000.000.000', {
-            reverse: true
-        });
-
-    })
-</script>

@@ -3,16 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Beastudi_model extends CI_Model
 {
-    public function getAllBeastudi()
-    {
-        return $this->db->get('beastudi')->result_array();
-    }
-
-    public function getBeastudiById($id)
-    {
-        return $this->db->get_where('beastudi', ['id' => $id])->row_array();
-    }
-
     public function getBeastudi()
     {
         $query = "SELECT `beastudi`.*, `pic`.`nama`
@@ -22,19 +12,14 @@ class Beastudi_model extends CI_Model
         return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
 
-    //error
-    public function tambahDataBeastudi()
+    public function getAllBeastudi()
     {
-        $data = [
-            "nama_mh" => $this->input->post('nama_mh', true),
-            "jk" => $this->input->post('jk', true),
-            "semester" => $this->input->post('semester', true),
-            "angkatan" => $this->input->post('angkatan', true),
-            "programstudi" => $this->input->post('programstudi', true),
-            "kontribusi" => $this->input->post('kontribusi', true),
-            "pic_id" => $this->input->post('pic_id', true)
-        ];
-        $this->db->insert('beastudi ', $data);
+        return $this->db->get('beastudi')->result_array();
+    }
+
+    public function getBeastudiById($id)
+    {
+        return $this->db->get_where('beastudi', ['id' => $id])->row_array();
     }
 
     public function editDataBeastudi()
