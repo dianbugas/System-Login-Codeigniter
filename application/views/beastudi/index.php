@@ -58,13 +58,15 @@
             </div>
             <!-- method="post" ketika input tidak terlihat di url -->
             <!-- action untuk mengarakan controller role -->
-            <form action="<?= base_url('beastudi'); ?>" method="post">
+            <form action="<?= base_url('beastudi/insert'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
                             <option value="">Select Menu</option>
-                            <?php foreach ($beastudi as $p) : ?>
-                                <option value="<?= $p['id']; ?>"><?= $p['nama']; ?></option>
+                            <?php
+                            $query = $this->db->query("SELECT * FROM pic");
+                            foreach ($query->result() as $p) : ?>
+                                <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -73,48 +75,48 @@
                     </div>
                     <div class="form-group">
                         <label class="radio inline">
-                            <input type="radio" name="jk" value="l" checked>
+                            <input type="radio" name="jk" value="Laki-Laki" checked>
                             <span> Laki - Laki </span>
                         </label>
                         <label class="radio inline">
-                            <input type="radio" name="jk" value="p">
+                            <input type="radio" name="jk" value="Perempuan">
                             <span> Perempuan </span>
                         </label>
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="semester" value="semester" id="semester">
                             <option class="hidden" selected disabled>Semester</option>
-                            <option>1 Satu</option>
-                            <option>2 Dua</option>
-                            <option>3 Tiga</option>
-                            <option>4 Empat</option>
-                            <option>5 Lima</option>
-                            <option>6 Enam</option>
-                            <option>7 Tujuh</option>
-                            <option>8 Delapan</option>
+                            <option>Satu</option>
+                            <option>Dua</option>
+                            <option>Tiga</option>
+                            <option>Empat</option>
+                            <option>Lima</option>
+                            <option>Enam</option>
+                            <option>Tujuh</option>
+                            <option>Delapan</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="number" maxlength="4" class="form-control" placeholder="Angkatan" value="angkatan" id="angkatan" name="angkatan" />
+                        <input type="number" maxlength="4" class="form-control" placeholder="Angkatan" id="angkatan" name="angkatan" />
                     </div>
                     <div class="form-group">
-                        <select class="form-control">
-                            <option class="hidden" id="programstudi" name="programstudi" selected disabled>Program Studi</option>
-                            <option>Teknik Informatika</option>
-                            <option>Sistem Informasi</option>
+                        <select class="form-control" name="programstudi" id="programstudi">
+                            <option>Pilih Program Studi</option>
+                            <option value="Teknik Informatika">Teknik Informatika</option>
+                            <option value="Sistem Informasi">Sistem Informasi</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <select class="form-control" id="kontribusi" name="kontribusi">
-                            <option class="hidden" selected disabled>Jenis Kontribusi</option>
-                            <option>Content</option>
-                            <option>Upload Content</option>
-                            <option>Website Developer</option>
-                            <option>Design Graphic</option>
-                            <option>Video Content</option>
-                            <option>LPPM</option>
-                            <option>Inkubator</option>
-                            <option>LPMI</option>
+                            <option>Pilih Jenis Kontribusi</option>
+                            <option value="Content">Content</option>
+                            <option value="Upload Content">Upload Content</option>
+                            <option value="Website Developer">Website Developer</option>
+                            <option value="Design Graphic">Design Graphic</option>
+                            <option value="Video Content">Video Content</option>
+                            <option value="LPPM">LPPM</option>
+                            <option value="Inkubator">Inkubator</option>
+                            <option value="LPMI">LPMI</option>
                         </select>
                     </div>
                     <div class="modal-footer">

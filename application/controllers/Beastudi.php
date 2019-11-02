@@ -54,8 +54,27 @@ class Beastudi extends CI_Controller
             $this->db->insert('beastudi ', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi baru ditambahkan!</div>');
             //$this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('beastudi');
+            // redirect('beastudi');
         }
+    }
+
+    public function insert()
+    {
+        $this->load->model('Beastudi_model');
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $menu_id = $this->input->post('menu_id');
+        $nama = $this->input->post('nama');
+        $jk = $this->input->post('jk');
+        $semester = $this->input->post('semester');
+        $angkatan = $this->input->post('angkatan');
+        $programstudi = $this->input->post('programstudi');
+        $kontribusi = $this->input->post('kontribusi');
+
+        $this->Beastudi_model->input_data($menu_id, $nama, $jk, $semester, $angkatan, $programstudi, $kontribusi);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi baru ditambahkan!</div>');
+        redirect('beastudi');
     }
 
     public function tambah()

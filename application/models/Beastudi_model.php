@@ -12,6 +12,12 @@ class Beastudi_model extends CI_Model
         return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
 
+    public function input_data($menu_id, $nama, $jk, $semester, $angkatan, $programstudi, $kontribusi)
+    {
+        $query = "INSERT INTO beastudi (nama_mh,jk,semester,angkatan,programstudi,kontribusi,pic_id) VALUES ('$nama','$jk','$semester','$angkatan','$programstudi','$kontribusi','$menu_id')";
+        $this->db->query($query);
+    }
+
     public function getAllBeastudi()
     {
         return $this->db->get('beastudi')->result_array();
