@@ -4,6 +4,72 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
         <div class="col-lg-8">
+            <div class="modal-body">
+                <div class="form-group">
+                    <select name="menu_id" id="menu_id" class="form-control">
+                        <option value="">PIC</option>
+                        <?php
+                        $query = $this->db->query("SELECT * FROM pic");
+                        foreach ($query->result() as $p) : ?>
+                            <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap">
+                </div>
+                <div class="form-group">
+                    <label class="radio inline">
+                        <input type="radio" name="jk" value="Laki-Laki" checked>
+                        <span> Laki - Laki </span>
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="jk" value="Perempuan">
+                        <span> Perempuan </span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="semester" value="semester" id="semester">
+                        <option class="hidden" selected disabled>Semester</option>
+                        <option>Satu</option>
+                        <option>Dua</option>
+                        <option>Tiga</option>
+                        <option>Empat</option>
+                        <option>Lima</option>
+                        <option>Enam</option>
+                        <option>Tujuh</option>
+                        <option>Delapan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" maxlength="4" class="form-control" placeholder="Angkatan" id="angkatan" name="angkatan" />
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="programstudi" id="programstudi">
+                        <option>Pilih Program Studi</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="kontribusi" name="kontribusi">
+                        <option>Pilih Jenis Kontribusi</option>
+                        <option value="Content">Content</option>
+                        <option value="Upload Content">Upload Content</option>
+                        <option value="Website Developer">Website Developer</option>
+                        <option value="Design Graphic">Design Graphic</option>
+                        <option value="Video Content">Video Content</option>
+                        <option value="LPPM">LPPM</option>
+                        <option value="Inkubator">Inkubator</option>
+                        <option value="LPMI">LPMI</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </div>
+            </form>
             <form action="" method='post'>
                 <div class="form-group row">
                     <label for="menu" class="col-sm-3 col-form-label">PIC</label>
