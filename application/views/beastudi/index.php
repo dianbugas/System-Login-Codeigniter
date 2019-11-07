@@ -62,7 +62,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
-                            <option value="">PIC</option>
+                            <option value="">Select Menu</option>
                             <?php
                             $query = $this->db->query("SELECT * FROM pic");
                             foreach ($query->result() as $p) : ?>

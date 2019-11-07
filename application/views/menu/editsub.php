@@ -4,7 +4,7 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <div class="row">
         <div class="col-lg-8">
-            <form action="<?php base_url('menu/submenu'); ?>" method="post">
+            <form action="<?php base_url('menu/edit'); ?>" method="post">
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-7">
@@ -16,11 +16,14 @@
                     <label for="menu_id" class="col-sm-2 col-form-label">Menu</label>
                     <div class="col-sm-7">
                         <select name="menu_id" id="menu_id" class="form-control">
-                            <option value="">Select Menu</option>
-                            <?php foreach ($subMenu as $sm) : ?>
-                                <option value="<?= $sm['id']; ?>"><?= $sm['menu']; ?></option>
+                            <option value=""><?= $submenu['menu_id']; ?></option>
+                            <?php
+                            $query = $this->db->query("SELECT * FROM user_menu");
+                            foreach ($query->result() as $sm) : ?>
+                                <option value="<?= $sm->id; ?>"><?= $sm->menu; ?></option>
                             <?php endforeach; ?>
                         </select>
+                        <!--  -->
                         <small class="form-text text-danger"><?= form_error('menu_id'); ?></small>
                     </div>
                 </div>

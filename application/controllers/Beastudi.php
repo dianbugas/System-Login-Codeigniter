@@ -77,47 +77,6 @@ class Beastudi extends CI_Controller
         redirect('beastudi');
     }
 
-    public function tambah()
-    {
-        $data['title'] = 'Tambah Data Beastudi';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $this->load->model('Beastudi_model', 'pic');
-        //query submenu
-        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['beastudi'] = $this->pic->getBeastudi();
-        $data['pic'] = $this->db->get('beastudi')->result_array();
-        // insert data
-        $this->form_validation->set_rules('nama_mh', 'Nama', 'required'); //name nya menu di index
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin');
-        $this->form_validation->set_rules('semester', 'Semester');
-        $this->form_validation->set_rules('angkatan', 'Angkatan');
-        $this->form_validation->set_rules('programstudi', 'Program Studi');
-        $this->form_validation->set_rules('kontribusi', 'Kontribusi');
-        $this->form_validation->set_rules('pic_id', 'PIC');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('beastudi/tambah', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $data = [
-                'nama_mh' => $this->input->post('nama_mh'),
-                'jk' => $this->input->post('jk'),
-                'semester' => $this->input->post('semester'),
-                'angkatan' => $this->input->post('angkatan'),
-                'programstudi' => $this->input->post('programstudi'),
-                'kontribusi' => $this->input->post('kontribusi'),
-                'pic_id' => $this->input->post('pic_id')
-            ];
-
-            $this->db->insert('beastudi ', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi Berhasil di tambah!</div>');
-            redirect('beastudi');
-        }
-    }
 
     public function detail($id)
     {
@@ -128,6 +87,33 @@ class Beastudi extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('beastudi/detail', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function update($id)
+    {
+        $this->load->model('Beastudi_model');
+        $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data = [
+            "menu_id" => $this->input->post('menu_id'),
+            "nama" => $this->input->post('nama'),
+            "jk" => $this->input->post('jk'),
+            "semester" => $this->input->post('semester'),
+            "angkatan" => $this->input->post('angkatan'),
+            "programstudi" => $this->input->post('programstudi'),
+            "kontribusi" => $this->input->post('kontribusi')
+        ];
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('beastudi/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Beastudi_model->update_data($id, $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi baru ditambahkan!</div>');
+            redirect('beastudi');
+        }
     }
 
     public function edit($id)
@@ -142,7 +128,7 @@ class Beastudi extends CI_Controller
         $data['bbeastudi'] = $this->pic->getBeastudi();
         $data['pic'] = $this->db->get('pic')->result_array();
 
-        $this->form_validation->set_rules('pic_id', 'PIC', 'required');
+        $this->form_validation->set_rules('pic_id', 'pic_id', 'required');
         $this->form_validation->set_rules('nama_mh', 'nama_mh', 'required');
         $this->form_validation->set_rules('jk', 'jk', 'required');
         $this->form_validation->set_rules('semester', 'semester', 'required');
