@@ -26,7 +26,7 @@ class Beastudi_model extends CI_Model
 
     public function update_data($menu_id, $nama, $jk, $semester, $angkatan, $programstudi, $kontribusi)
     {
-        $query = "UPDATE INTO beastudi (nama_mh,jk,semester,angkatan,programstudi,kontribusi,pic_id) VALUES ('$nama','$jk','$semester','$angkatan','$programstudi','$kontribusi','$menu_id')";
+        $query = "UPDATE SET beastudi (nama_mh,jk,semester,angkatan,programstudi,kontribusi,pic_id) VALUES ('$nama','$jk','$semester','$angkatan','$programstudi','$kontribusi','$menu_id')";
         $this->db->query($query);
     }
 

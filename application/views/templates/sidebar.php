@@ -49,11 +49,27 @@
         <a class="nav-link pb-0" href="<?= base_url($sm['url']); ?>">
           <i class="<?= $sm['icon']; ?>"></i>
           <span><?= $sm['title']; ?></span></a>
+
         </li>
       <?php endforeach; ?>
       <!-- Divider -->
       <hr class="sidebar-divider mt-1">
     <?php endforeach; ?>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-user"></i>
+        <span>Profile</span>
+      </a>
+      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Profile</h6>
+          <a class="collapse-item" href="<?= base_url('user'); ?>">My Profile</a>
+          <a class="collapse-item" href="<?= base_url('user/changepassword'); ?>">Lupa Password</a>
+          <a class="collapse-item" href="<?= base_url('user/edit'); ?>">Edit Profile</a>
+        </div>
+      </div>
+    </li>
 
     <!-- Nav Item - Profile -->
     <li class="nav-item">
