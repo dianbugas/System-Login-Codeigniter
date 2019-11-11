@@ -94,6 +94,12 @@ class Beastudi extends CI_Controller
         $this->load->model('Beastudi_model');
         $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Beastudi_model', 'pic');
+        //query submenu
+        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        $data['bbeastudi'] = $this->pic->getBeastudi();
+        $data['pic'] = $this->db->get('pic')->result_array();
+
         $data = [
             "menu_id" => $this->input->post('menu_id'),
             "nama" => $this->input->post('nama'),

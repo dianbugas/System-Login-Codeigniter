@@ -10,7 +10,7 @@
                         <label for="menu" class="col-sm-3 col-form-label">PIC</label>
                         <div class="col-sm-7">
                             <select name="menu_id" id="menu_id" class="form-control">
-                                <option value=""><?= $beastudi['pic_id']; ?></option>
+                                <option value=""><?= $beastudi['nama']; ?></option>
                                 <?php
                                 $query = $this->db->query("SELECT * FROM pic");
                                 foreach ($query->result() as $p) : ?>
