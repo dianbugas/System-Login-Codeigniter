@@ -46,14 +46,13 @@
         <?php else : ?>
         <li class="nav-item">
         <?php endif; ?>
-        <a class="nav-link pb-0" href="<?= base_url($sm['url']); ?>">
+        <a class="nav-link pb-3" href="<?= base_url($sm['url']); ?>">
           <i class="<?= $sm['icon']; ?>"></i>
           <span><?= $sm['title']; ?></span></a>
-
         </li>
       <?php endforeach; ?>
       <!-- Divider -->
-      <hr class="sidebar-divider mt-1">
+      <!-- <hr class="sidebar-divider mt-1"> -->
     <?php endforeach; ?>
 
     <li class="nav-item">
