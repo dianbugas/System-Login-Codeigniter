@@ -89,56 +89,27 @@ class Beastudi extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function update($id)
-    {
-        $this->load->model('Beastudi_model');
-        $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->load->model('Beastudi_model', 'pic');
-        //query submenu
-        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['bbeastudi'] = $this->pic->getBeastudi();
-        $data['pic'] = $this->db->get('pic')->result_array();
-
-        $data = [
-            "menu_id" => $this->input->post('menu_id'),
-            "nama" => $this->input->post('nama'),
-            "jk" => $this->input->post('jk'),
-            "semester" => $this->input->post('semester'),
-            "angkatan" => $this->input->post('angkatan'),
-            "programstudi" => $this->input->post('programstudi'),
-            "kontribusi" => $this->input->post('kontribusi')
-        ];
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('beastudi/edit', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->Beastudi_model->update_data($id, $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Beastudi baru ditambahkan!</div>');
-            redirect('beastudi');
-        }
-    }
-
     public function edit($id)
     {
         $data['title'] = 'Edit Data Beastudi';
         $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
+        $data['picc'] = $this->Pic_model->getAllPic();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->load->model('Beastudi_model', 'pic');
-        //query submenu
-        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['bbeastudi'] = $this->pic->getBeastudi();
-        $data['pic'] = $this->db->get('pic')->result_array();
+        $data['jurusan'] = ['Teknik Informatika', 'Sistem Informasi'];
+        $data['kontribusi'] = ['Content', 'Upload Content', 'Website Developer', 'Design Graphic', 'Video Content', 'LPPM', 'Inkubator', 'LPMI'];
+        $data['semester'] = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan'];
+        // $this->load->model('Beastudi_model', 'pic');
+        // //query submenu
+        // //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+        // $data['bbeastudi'] = $this->pic->getBeastudi();
+        // $data['pic'] = $this->db->get('pic')->result_array();
 
-        $this->form_validation->set_rules('pic_id', 'pic_id', 'required');
+        $this->form_validation->set_rules('menu_id', 'menu_id', 'required');
         $this->form_validation->set_rules('nama_mh', 'nama_mh', 'required');
         $this->form_validation->set_rules('jk', 'jk', 'required');
         $this->form_validation->set_rules('semester', 'semester', 'required');
-        $this->form_validation->set_rules('angkatan', 'angkatan', 'required');
+        $this->form_validation->set_rules('angkatan', 'angkatan', 'required|numeric');
         $this->form_validation->set_rules('programstudi', 'programstudi', 'required');
         $this->form_validation->set_rules('kontribusi', 'kontribusi', 'required');
 
@@ -149,7 +120,7 @@ class Beastudi extends CI_Controller
             $this->load->view('beastudi/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Beastudi_model->editDataBeastudi($id);
+            $this->Beastudi_model->editDataBeastudi();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');
             redirect('beastudi');
         }

@@ -8,7 +8,6 @@ class Beastudi_model extends CI_Model
         return $this->db->get_where('beastudi', ['id' => $id])->row_array();
     }
 
-
     public function getBeastudi()
     {
         $query = "SELECT `beastudi`.*, `pic`.`nama`
@@ -23,16 +22,6 @@ class Beastudi_model extends CI_Model
         $query = "INSERT INTO beastudi (nama_mh,jk,semester,angkatan,programstudi,kontribusi,pic_id) VALUES ('$nama','$jk','$semester','$angkatan','$programstudi','$kontribusi','$menu_id')";
         $this->db->query($query);
     }
-
-    public function update_data($menu_id, $nama, $jk, $semester, $angkatan, $programstudi, $kontribusi)
-    {
-        $query = "UPDATE SET beastudi (nama_mh,jk,semester,angkatan,programstudi,kontribusi,pic_id) VALUES ('$nama','$jk','$semester','$angkatan','$programstudi','$kontribusi','$menu_id')";
-        $this->db->query($query);
-    }
-
-
-
-
 
     public function editDataBeastudi()
     {

@@ -64,8 +64,8 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Profile</h6>
           <a class="collapse-item" href="<?= base_url('user'); ?>">My Profile</a>
-          <a class="collapse-item" href="<?= base_url('user/changepassword'); ?>">Lupa Password</a>
           <a class="collapse-item" href="<?= base_url('user/edit'); ?>">Edit Profile</a>
+          <a class="collapse-item" href="<?= base_url('user/changepassword'); ?>">Lupa Password</a>
         </div>
       </div>
     </li>
