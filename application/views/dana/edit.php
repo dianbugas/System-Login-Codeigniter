@@ -33,7 +33,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="validationTooltipUsernamePrepend">Rp</span>
                             </div>
-                            <input type="text" class="form-control" name="dana" id="rupiah" value="<?= $dana['dana']; ?>" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend">
+                            <input type="text" class="form-control" name="dana" id="rupiah" value="<?= $dana['dana']; ?>" placeholder="Nominal Dana" aria-describedby="validationTooltipUsernamePrepend">
                             <small class="form-text text-danger"><?= form_error('dana'); ?></small>
                             <div class="invalid-tooltip">
                                 Please choose a unique and valid username.
