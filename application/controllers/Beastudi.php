@@ -89,12 +89,51 @@ class Beastudi extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // public function edit($id)
+    // {
+    //     $data['title'] = 'Edit Data Beastudi';
+    //     $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
+    //     $data['picc'] = $this->Pic_model->getAllPic();
+    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+    //     $data['jurusan'] = ['Teknik Informatika', 'Sistem Informasi'];
+    //     $data['kontribusi'] = ['Content', 'Upload Content', 'Website Developer', 'Design Graphic', 'Video Content', 'LPPM', 'Inkubator', 'LPMI'];
+    //     $data['semester'] = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan'];
+    //     // $this->load->model('Beastudi_model', 'pic');
+    //     // //query submenu
+    //     // //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
+    //     // $data['bbeastudi'] = $this->pic->getBeastudi();
+    //     // $data['pic'] = $this->db->get('pic')->result_array();
+
+    //     $this->form_validation->set_rules('menu_id', 'menu_id', 'required');
+    //     $this->form_validation->set_rules('nama_mh', 'nama_mh', 'required');
+    //     $this->form_validation->set_rules('jk', 'jk', 'required');
+    //     $this->form_validation->set_rules('semester', 'semester', 'required');
+    //     $this->form_validation->set_rules('angkatan', 'angkatan', 'required|numeric');
+    //     $this->form_validation->set_rules('programstudi', 'programstudi', 'required');
+    //     $this->form_validation->set_rules('kontribusi', 'kontribusi', 'required');
+
+    //     if ($this->form_validation->run() == false) {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/sidebar', $data);
+    //         $this->load->view('templates/topbar', $data);
+    //         $this->load->view('beastudi/edit', $data);
+    //         $this->load->view('templates/footer');
+    //     } else {
+    //         $this->Beastudi_model->editDataBeastudi();
+    //         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');
+    //         redirect('beastudi');
+    //     }
+    // }
+
     public function edit($id)
     {
         $data['title'] = 'Edit Data Beastudi';
-        $data['beastudi'] = $this->Beastudi_model->getBeastudiById($id);
-        $data['picc'] = $this->Pic_model->getAllPic();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $where = array('id' => $id);
+        $data['beastudi'] = $this->Beastudi_model->editdata($where, 'beastudi')->result();
+        //$data['picc'] = $this->Pic_model->getAllPic();
+
 
         $data['jurusan'] = ['Teknik Informatika', 'Sistem Informasi'];
         $data['kontribusi'] = ['Content', 'Upload Content', 'Website Developer', 'Design Graphic', 'Video Content', 'LPPM', 'Inkubator', 'LPMI'];
@@ -105,25 +144,54 @@ class Beastudi extends CI_Controller
         // $data['bbeastudi'] = $this->pic->getBeastudi();
         // $data['pic'] = $this->db->get('pic')->result_array();
 
-        $this->form_validation->set_rules('menu_id', 'menu_id', 'required');
-        $this->form_validation->set_rules('nama_mh', 'nama_mh', 'required');
-        $this->form_validation->set_rules('jk', 'jk', 'required');
-        $this->form_validation->set_rules('semester', 'semester', 'required');
-        $this->form_validation->set_rules('angkatan', 'angkatan', 'required|numeric');
-        $this->form_validation->set_rules('programstudi', 'programstudi', 'required');
-        $this->form_validation->set_rules('kontribusi', 'kontribusi', 'required');
+        // $this->form_validation->set_rules('menu_id', 'menu_id', 'required');
+        // $this->form_validation->set_rules('nama_mh', 'nama_mh', 'required');
+        // $this->form_validation->set_rules('jk', 'jk', 'required');
+        // $this->form_validation->set_rules('semester', 'semester', 'required');
+        // $this->form_validation->set_rules('angkatan', 'angkatan', 'required|numeric');
+        // $this->form_validation->set_rules('programstudi', 'programstudi', 'required');
+        // $this->form_validation->set_rules('kontribusi', 'kontribusi', 'required');
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('beastudi/edit', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->Beastudi_model->editDataBeastudi();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');
-            redirect('beastudi');
-        }
+        // if ($this->form_validation->run() == false) {
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('beastudi/edit', $data);
+        $this->load->view('templates/footer');
+        // } else {
+        // $this->Beastudi_model->editDataBeastudi();
+        // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');
+        // redirect('beastudi');
+        //}
+    }
+
+    public function update()
+    {
+        $id = $this->input->post('id');
+        $pic_id = $this->input->post('pic_id');
+        $nama_mh = $this->input->post('nama_mh');
+        $jk = $this->input->post('jk');
+        $semester = $this->input->post('semester');
+        $angkatan = $this->input->post('angkatan');
+        $programstudi = $this->input->post('programstudi');
+        $kontribusi = $this->input->post('kontribusi');
+
+        $data = array(
+            'pic_id' => $pic_id,
+            'nama_mh' => $nama_mh,
+            'jk' => $jk,
+            'semester' => $semester,
+            'angkatan' => $angkatan,
+            'programstudi' => $programstudi,
+            'kontribusi' => $programstudi
+        );
+
+        $where = array(
+            $id => $id
+        );
+        $this->Beastudi_model->update_data($where, $data, 'beastudi');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');
+        redirect('beastudi');
     }
 
     public function delete($id)

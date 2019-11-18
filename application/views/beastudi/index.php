@@ -118,7 +118,7 @@
                             <option value="Teknik Informatika">Teknik Informatika</option>
                             <option value="Sistem Informasi">Sistem Informasi</option>
                         </select>
-                        <small class="form-text- text-danger"><?= form_error('program'); ?></small>
+                        <small class="form-text- text-danger"><?= form_error('programstudi'); ?></small>
                     </div>
                     <div class="form-group">
                         <select class="form-control" id="kontribusi" name="kontribusi">

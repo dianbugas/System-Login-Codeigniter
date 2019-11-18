@@ -32,7 +32,7 @@ class Beastudi_model extends CI_Model
             "angkatan" => $this->input->post('angkatan', true),
             "programstudi" => $this->input->post('programstudi', true),
             "kontribusi" => $this->input->post('kontribusi', true),
-            "pic_id" => $this->input->post('pic_id', true)
+            "menu_id" => $this->input->post('menu_id', true)
         ];
 
         $this->db->where('id', $this->input->post('id'));
@@ -52,5 +52,16 @@ class Beastudi_model extends CI_Model
         } else {
             return 0;
         }
+    }
+
+    public function editdata($where, $table)
+    {
+        return $this->db->get_where($table, $where);
+    }
+
+    public function update_data($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
     }
 }
