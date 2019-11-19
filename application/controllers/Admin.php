@@ -113,56 +113,42 @@ class Admin extends CI_Controller
     public function editusers($id)
     {
         $data['title'] = 'Edit Data Users';
-        $data['user'] = $this->User_model->getUserById($id);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $where = array('id' => $id);
+        $data['users'] = $this->User_model->editdata($where, 'user')->result();
 
-        $this->form_validation->set_rules('role_id', 'Role Id', 'required|trim');
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/editusers', $data);
+        $this->load->view('templates/footer');
+    }
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('user/editusers', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $role_id = $this->input->post('role_id');
-            $email = $this->input->post('email');
+    public function update()
+    {
+        $id = $this->input->post('id');
+        $name = $this->input->post('name');
+        $email = $this->input->post('email');
+        $image = $this->input->post('image');
+        $role_id = $this->input->post('role_id');
+        $is_active = $this->input->post('is_active');
+        $date_created = $this->input->post('date_created');
 
-            //cek jika ada gambar yang akan  diupload
-            // $upload_image = $_FILES['image']['name'];
+        $data = array(
+            'name' => $name,
+            'email' => $email,
+            'image' => $image,
+            'role_id' => $role_id,
+            'is_active' => $is_active,
+            'date_created' => $date_created
+        );
 
-            // if ($upload_image) {
-            //     $config['upload_path'] = './assets/img/profile/';
-            //     $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            //     $config['max_size'] = '4048'; //ukuran gambar
-
-            //     $this->load->library('upload', $config);
-
-            //     if ($this->upload->do_upload('image')) {
-            //         //cek gambar lama ngambil dari variabel data
-            //         $old_image = $data['user']['image'];
-            //         //cek gambar defaul bukan
-            //         if ($old_image != 'default.jpg') {
-            //             //ganti gambar baru
-            //             unlink(FCPATH . 'assets/img/profile/' . $old_image);
-            //         }
-
-            //         // berisi nama file baru yg mau di masukan di baris ke 70. klu ada gambarnya maka bertambah
-            //         $new_image = $this->upload->data('file_name');
-            //         //klu ga ada gambar maka perintah ini tdk akan di set
-            //         $this->db->set('image', $new_image);
-            //     } else {
-            //         echo $this->upload->display_errors();
-            //     };
-            // }
-
-            $this->db->set('role_id', $role_id);
-            $this->db->where('email', $email);
-            $this->db->update('user');
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil User telah diperbarui!</div>');
-            redirect('admin/users');
-        }
+        $where = array(
+            'id' => $id
+        );
+        $this->User_model->update_data($where, $data, 'user');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Users Berhasil di Edit!</div>');
+        redirect('admin/users');
     }
 
     public function hapus($id)
