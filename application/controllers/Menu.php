@@ -125,33 +125,43 @@ class Menu extends CI_Controller
 
     public function editsub($id)
     {
-        $data['title'] = 'Edit Submenu Management';
-        $data['submenu'] = $this->Submenu_model->getSubMenuById($id); //untuk view edit
+        $data['title'] = 'Edit Data Submenu';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $where = array('id' => $id);
+        $data['submenu'] = $this->Submenu_model->editdata($where, 'user_sub_menu')->result();
 
-        $this->load->model('Menu_model', 'menu');
-        //query submenu
-        //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
-        $data['subMenu'] = $this->menu->getSubMenu();  // untuk view join
-        $data['menu'] = $this->db->get('user_menu')->result_array();
-
-        $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
-        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
-        $this->form_validation->set_rules('url', 'URL', 'required');
-        $this->form_validation->set_rules('icon', 'Icon', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('menu/editsub', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->Menu_model->editDataSubMenu($id);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu berhasil di ubah!</div>');
-            redirect('menu/submenu');
-        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/editsub', $data);
+        $this->load->view('templates/footer');
     }
+
+    public function update()
+    {
+        $id = $this->input->post('id');
+        $menu_id = $this->input->post('menu_id');
+        $title = $this->input->post('title');
+        $url = $this->input->post('url');
+        $icon = $this->input->post('icon');
+        $is_active = $this->input->post('is_active');
+
+        $data = array(
+            'menu_id' => $menu_id,
+            'title' => $title,
+            'url' => $url,
+            'icon' => $icon,
+            'is_active' => $is_active
+        );
+
+        $where = array(
+            'id' => $id
+        );
+        $this->Submenu_model->update_data($where, $data, 'user_sub_menu');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub Menu Berhasil di Edit!</div>');
+        redirect('menu/submenu');
+    }
+
 
 
     public function hapus($id)

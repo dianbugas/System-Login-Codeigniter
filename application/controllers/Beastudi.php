@@ -134,7 +134,7 @@ class Beastudi extends CI_Controller
         $data['beastudi'] = $this->Beastudi_model->editdata($where, 'beastudi')->result();
         //$data['picc'] = $this->Pic_model->getAllPic();
 
-
+        $data['jk'] = ['Laki-Laki', 'Perempuan'];
         $data['jurusan'] = ['Teknik Informatika', 'Sistem Informasi'];
         $data['kontribusi'] = ['Content', 'Upload Content', 'Website Developer', 'Design Graphic', 'Video Content', 'LPPM', 'Inkubator', 'LPMI'];
         $data['semester'] = ['Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan'];
@@ -183,11 +183,11 @@ class Beastudi extends CI_Controller
             'semester' => $semester,
             'angkatan' => $angkatan,
             'programstudi' => $programstudi,
-            'kontribusi' => $programstudi
+            'kontribusi' => $kontribusi
         );
 
         $where = array(
-            $id => $id
+            'id' => $id
         );
         $this->Beastudi_model->update_data($where, $data, 'beastudi');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mahasiswa Beastudi Berhasil di Edit!</div>');

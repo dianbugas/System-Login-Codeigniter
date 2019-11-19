@@ -11,12 +11,15 @@
                         <div class="form-group row">
                             <label for="menu" class="col-sm-3 col-form-label">PIC</label>
                             <div class="col-sm-7">
-                                <select name="menu_id" id="menu_id" class="form-control">
-                                    <option value="">Select Menu</option>
+                                <select name="pic_id" id="pic_id" class="form-control">
                                     <?php
                                         $query = $this->db->query("SELECT * FROM pic");
                                         foreach ($query->result() as $p) : ?>
-                                        <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
+                                        <?php if ($p == $query->result()) : ?>
+                                            <option value="<?= $p->id; ?>" selected><?= $p->nama; ?></option>
+                                        <?php else : ?>
+                                            <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
                                 <small class="form-text- text-danger"><?= form_error('menu_id'); ?></small>
@@ -25,22 +28,28 @@
                         <div class="form-group row">
                             <label for="menu" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-7">
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap" value="<?= $bes->nama_mh ?>">
-                                <small class="form-text- text-danger"><?= form_error('nama'); ?></small>
+                                <input type="text" name="nama_mh" class="form-control" id="nama_mh" placeholder="Nama Lengkap" value="<?= $bes->nama_mh ?>">
+                                <small class="form-text- text-danger"><?= form_error('nama_mh'); ?></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="menu" class="col-sm-3 col-form-label">Jenis Kelamin</label>
+                            <label for="jk" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-7">
                                 <div class="form-group">
-                                    <label class="radio inline">
+                                    <!-- <label class="radio inline">
                                         <input type="radio" name="jk" value="Laki-Laki" checked>
                                         <span> Laki - Laki </span>
                                     </label>
                                     <label class="radio inline">
                                         <input type="radio" name="jk" value="Perempuan">
                                         <span> Perempuan </span>
-                                    </label>
+                                    </label> -->
+                                    <!-- <label><input type="radio" name="jk" value="Laki-Laki" <?php echo ($beastudi == 'Laki-Laki' ? ' checked' : ''); ?>> Laki-Laki</label>
+                                    <label><input type="radio" name="jk" value="Perempuan" <?php echo ($beastudi == 'Perempuan' ? ' checked' : ''); ?>> Perempuan</label> -->
+                                    <label for=""><input type="radio" name="jk" value="Laki-Laki" <?php echo ($jk == 'Laki-Laki') ? 'checked' : ''; ?>> Laki-Laki</label>
+                                    <label for=""><input type="radio" name="jk" value="Perempuan" <?php echo ($jk == 'Perempuan') ? 'checked' : ''; ?>> Perempuan</label>
+
+
                                     <small class="form-text- text-danger"><?= form_error('jk'); ?></small>
                                 </div>
                             </div>
@@ -100,7 +109,7 @@
                         </div>
                         <div class="form-file row justify-content-end">
                             <div class="col-sm-9">
-                                <button type="submit" name="edit" id="edit" class="btn btn-primary">Edit</button>
+                                <button type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </div>
                     </form>
