@@ -13,13 +13,12 @@
                             <div class="col-sm-7">
                                 <select name="pic_id" id="pic_id" class="form-control">
                                     <?php
-                                        $query = $this->db->query("SELECT * FROM pic");
-                                        foreach ($query->result() as $p) : ?>
-                                        <?php if ($p == $query->result()) : ?>
-                                            <option value="<?= $p->id; ?>" selected><?= $p->nama; ?></option>
-                                        <?php else : ?>
-                                            <option value="<?= $p->id; ?>"><?= $p->nama; ?></option>
-                                        <?php endif; ?>
+                                        $query = $this->db->query("SELECT * FROM pic")->result();
+                                        foreach ($query as $p) : ?>
+                                        <option <?php if ($p->id == $bes->pic_id) {
+                                                            echo 'selected';
+                                                        } ?> value="<?= $p->id; ?>"><?= $p->nama; ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                                 <small class="form-text- text-danger"><?= form_error('menu_id'); ?></small>
@@ -36,20 +35,8 @@
                             <label for="jk" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-7">
                                 <div class="form-group">
-                                    <!-- <label class="radio inline">
-                                        <input type="radio" name="jk" value="Laki-Laki" checked>
-                                        <span> Laki - Laki </span>
-                                    </label>
-                                    <label class="radio inline">
-                                        <input type="radio" name="jk" value="Perempuan">
-                                        <span> Perempuan </span>
-                                    </label> -->
-                                    <!-- <label><input type="radio" name="jk" value="Laki-Laki" <?php echo ($beastudi == 'Laki-Laki' ? ' checked' : ''); ?>> Laki-Laki</label>
-                                    <label><input type="radio" name="jk" value="Perempuan" <?php echo ($beastudi == 'Perempuan' ? ' checked' : ''); ?>> Perempuan</label> -->
-                                    <label for=""><input type="radio" name="jk" value="Laki-Laki" <?php echo ($jk == 'Laki-Laki') ? 'checked' : ''; ?>> Laki-Laki</label>
-                                    <label for=""><input type="radio" name="jk" value="Perempuan" <?php echo ($jk == 'Perempuan') ? 'checked' : ''; ?>> Perempuan</label>
-
-
+                                    <label for=""><input type="radio" name="jk" value="Laki-Laki" <?= $bes->jk == 'Laki-Laki' ? 'checked' : null; ?>> Laki-Laki</label>
+                                    <label for=""><input type="radio" name="jk" value="Perempuan" <?= ($bes->jk == 'Perempuan') ? 'checked' : ''; ?>> Perempuan</label>
                                     <small class="form-text- text-danger"><?= form_error('jk'); ?></small>
                                 </div>
                             </div>
@@ -58,12 +45,8 @@
                             <label for="menu" class="col-sm-3 col-form-label">Semester</label>
                             <div class="col-sm-7">
                                 <select class="form-control" name="semester" id="semester">
-                                    <?php foreach ($semester as $sem) : ?>
-                                        <?php if ($sem == $semester['semester']) : ?>
-                                            <option value="<?= $sem; ?>" selected><?= $sem; ?></option>
-                                        <?php else : ?>
-                                            <option value="<?= $sem; ?>"><?= $sem; ?></option>
-                                        <?php endif; ?>
+                                    <?php foreach ($semester as $s) : ?>
+                                        <option <?= $s->id == $bes->semester_id ? 'selected' : null; ?> value="<?= $s->id; ?>"><?= $s->semester; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <small class="form-text- text-danger"><?= form_error('semester'); ?></small>

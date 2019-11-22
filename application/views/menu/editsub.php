@@ -8,6 +8,7 @@
                 <?php foreach ($submenu as $sub) { ?>
                     <form action="<?= base_url() . 'menu/update'; ?>" method="post">
                         <div class="form-group row">
+                            <input type="hidden" name="id" value="<?= $sub->id ?>">
                             <label for="title" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-7">
                                 <input type="text" name="title" class="form-control" id="title" value="<?= $sub->title ?>">
@@ -28,7 +29,6 @@
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
-                                <small class="form-text text-danger"><?= form_error('menu_id'); ?></small>
                             </div>
                         </div>
                         <div class="form-group row">

@@ -7,6 +7,7 @@
             <?php foreach ($users as $us) { ?>
                 <form action="<?= base_url() . 'admin/update'; ?>" method='post'>
                     <div class="form-group row">
+                        <input type="hidden" name="id" value="<?= $us->id ?>">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="email" name="email" value="<?= $us->email ?>" readonly>
@@ -38,18 +39,13 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Role Id</label>
                         <div class="col-sm-10">
-                            <select name="pic_id" id="pic_id" class="form-control">
+                            <select name="role_id" id="role_id" class="form-control">
                                 <?php
-                                    $query = $this->db->query("SELECT * FROM user_role");
-                                    foreach ($query->result() as $p) : ?>
-                                    <?php if ($p == $query->result()) : ?>
-                                        <option value="<?= $p->id; ?>" selected><?= $p->role; ?></option>
-                                    <?php else : ?>
-                                        <option value="<?= $p->id; ?>"><?= $p->role; ?></option>
-                                    <?php endif; ?>
+                                    $query = $this->db->query("SELECT * FROM user_role")->result();
+                                    foreach ($query as $p) : ?>
+                                    <option value="<?= $p->id; ?>"><?= $p->role; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <!-- <input type="text" class="form-control" id="role_id" name="role_id" value="<?= $us->role_id ?>"> -->
                             <?= form_error('role_id', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                     </div>

@@ -36,7 +36,13 @@
                                 <td><?= $bs['nama']; ?></td>
                                 <td><?= $bs['nama_mh']; ?></td>
                                 <td><?= $bs['jk']; ?></td>
-                                <td><?= $bs['semester']; ?></td>
+                                <td>
+                                    <?php foreach ($semester as $s) { ?>
+                                    <?php if ($s->id == $bs['semester_id']) {
+                                                echo $s->semester;
+                                            }
+                                        } ?>
+                                </td>
                                 <td><?= $bs['angkatan']; ?></td>
                                 <td><?= $bs['programstudi']; ?></td>
                                 <td><?= $bs['kontribusi']; ?></td>
@@ -70,7 +76,7 @@
             <form action="<?= base_url('beastudi/insert'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <select name="menu_id" id="menu_id" class="form-control">
+                        <select name="pic_id" id="pic_id" class="form-control">
                             <option value="">Select Menu</option>
                             <?php
                             $query = $this->db->query("SELECT * FROM pic");
@@ -96,16 +102,12 @@
                         <small class="form-text- text-danger"><?= form_error('jk'); ?></small>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="semester" value="semester" id="semester">
-                            <option class="hidden" selected disabled>Semester</option>
-                            <option>Satu</option>
-                            <option>Dua</option>
-                            <option>Tiga</option>
-                            <option>Empat</option>
-                            <option>Lima</option>
-                            <option>Enam</option>
-                            <option>Tujuh</option>
-                            <option>Delapan</option>
+                        <select class="form-control" name="semester" id="semester">
+                            <option class="hidden" selected disabled> -- Semester -- </option>
+                            <?php foreach ($semester as $s) { ?>
+                                <option value="<?= $s->id ?>"> <?= $s->semester ?></option>
+                            <?php } ?>
+                            <!-- <option disabled> -- Semester -- </option> -->
                         </select>
                         <small class="form-text- text-danger"><?= form_error('semester'); ?></small>
                     </div>

@@ -11,4 +11,14 @@ class Report_model extends CI_Model
                 ";
         return $this->db->query($query)->result_array(); //RESULT ARRAY untuk menampilkan semua data
     }
+
+    public function getAllReport()
+    {
+        return $this->db->get('beastudi');
+    }
+
+    function tampil_data()
+    {
+        return $this->db->get('Mahasiswa');
+    }
 }

@@ -25,7 +25,7 @@
                                     <td><?= $rp['nama_mh']; ?></td>
                                     <td><?= $rp['semester']; ?></td>
                                     <td>
-                                        <a href="<?= base_url('report/pdf') ?>" class="btn btn-danger btn-circle btn-sm">
+                                        <a href="<?= base_url('report/laporan_pdf') ?>" class="btn btn-danger btn-circle btn-sm">
                                             <i class="fas fa-download"></i>
                                         </a>
                                     </td>

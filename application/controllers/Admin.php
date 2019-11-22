@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User_model');
+        $this->load->model('Beastudi_model');
         // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
     }
@@ -27,11 +28,23 @@ class Admin extends CI_Controller
         $data['title'] = 'Role';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['role'] = $this->db->get('user_role')->result_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/role', $data);
-        $this->load->view('templates/footer');
+
+        $this->form_validation->set_rules('role', 'Role', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/role', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'role' => $this->input->post('role')
+            ];
+            $this->db->insert('user_role', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Role User Berhasil Ditambahkan!</div>');
+            //$this->session->set_flashdata('flash', 'Ditambahkan');
+            redirect('admin/role');
+        }
     }
 
     public function roleAccess($role_id)
@@ -127,26 +140,17 @@ class Admin extends CI_Controller
     public function update()
     {
         $id = $this->input->post('id');
-        $name = $this->input->post('name');
-        $email = $this->input->post('email');
-        $image = $this->input->post('image');
-        $role_id = $this->input->post('role_id');
-        $is_active = $this->input->post('is_active');
         $date_created = $this->input->post('date_created');
 
         $data = array(
-            'name' => $name,
-            'email' => $email,
-            'image' => $image,
-            'role_id' => $role_id,
-            'is_active' => $is_active,
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'role_id' => $this->input->post('role_id'),
+            'is_active' => $this->input->post('is_active'),
             'date_created' => $date_created
         );
-
-        $where = array(
-            'id' => $id
-        );
-        $this->User_model->update_data($where, $data, 'user');
+        $id = ['id' => $id];
+        $this->Beastudi_model->update_data($id, $data, 'user');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Users Berhasil di Edit!</div>');
         redirect('admin/users');
     }

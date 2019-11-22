@@ -162,8 +162,6 @@ class Menu extends CI_Controller
         redirect('menu/submenu');
     }
 
-
-
     public function hapus($id)
     {
         $this->Menu_model->hapusDataSubMenuById($id);
