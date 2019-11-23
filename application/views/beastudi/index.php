@@ -44,8 +44,20 @@
                                         } ?>
                                 </td>
                                 <td><?= $bs['angkatan']; ?></td>
-                                <td><?= $bs['programstudi']; ?></td>
-                                <td><?= $bs['kontribusi']; ?></td>
+                                <td>
+                                    <?php foreach ($programstudi_id as $k) { ?>
+                                    <?php if ($k->id == $bs['programstudi_id']) {
+                                                echo $k->programstudi_id;
+                                            }
+                                        } ?>
+                                </td>
+                                <td>
+                                    <?php foreach ($kontribusi as $k) { ?>
+                                    <?php if ($k->id == $bs['kontribusi_id']) {
+                                                echo $k->kontribusi;
+                                            }
+                                        } ?>
+                                </td>
                                 <td>
                                     <a href="<?= base_url(); ?>beastudi/edit/<?= $bs['id']; ?>" class="badge badge-success">Edit</a>
                                     <a href="<?= base_url(); ?>beastudi/delete/<?= $bs['id']; ?>" class="badge badge-danger" onclick="return confirm('yakin menghapus data?');">delete</a>
@@ -77,7 +89,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <select name="pic_id" id="pic_id" class="form-control">
-                            <option value="">Select Menu</option>
+                            <option value="" selected disabled>-- Pilih PIC -- </option>
                             <?php
                             $query = $this->db->query("SELECT * FROM pic");
                             foreach ($query->result() as $p) : ?>
@@ -116,23 +128,19 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="programstudi" id="programstudi">
-                            <option class="hidden" selected disabled>Pilih Program Studi</option>
-                            <option value="Teknik Informatika">Teknik Informatika</option>
-                            <option value="Sistem Informasi">Sistem Informasi</option>
+                            <option class="hidden" selected disabled> -- Pilih Program Studi -- </option>
+                            <?php foreach ($programstudi as $k) { ?>
+                                <option value="<?= $k->id ?>"> <?= $k->programstudi ?></option>
+                            <?php } ?>
                         </select>
                         <small class="form-text- text-danger"><?= form_error('programstudi'); ?></small>
                     </div>
                     <div class="form-group">
                         <select class="form-control" id="kontribusi" name="kontribusi">
-                            <option class="hidden" selected disabled>Pilih Jenis Kontribusi</option>
-                            <option value="Content">Content</option>
-                            <option value="Upload Content">Upload Content</option>
-                            <option value="Website Developer">Website Developer</option>
-                            <option value="Design Graphic">Design Graphic</option>
-                            <option value="Video Content">Video Content</option>
-                            <option value="LPPM">LPPM</option>
-                            <option value="Inkubator">Inkubator</option>
-                            <option value="LPMI">LPMI</option>
+                            <option class="hidden" selected disabled> -- Pilih Jenis Kontribusi --</option>
+                            <?php foreach ($kontribusi as $k) { ?>
+                                <option value="<?= $k->id ?>"> <?= $k->kontribusi ?></option>
+                            <?php } ?>
                         </select>
                         <small class="form-text- text-danger"><?= form_error('kontribusi'); ?></small>
                     </div>

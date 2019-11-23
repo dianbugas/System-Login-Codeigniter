@@ -18,12 +18,18 @@
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            <?php foreach ($report as $rp) : ?>
+                            <?php foreach ($beastudi as $bs) : ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
-                                    <td><?= $rp['nama']; ?></td>
-                                    <td><?= $rp['nama_mh']; ?></td>
-                                    <td><?= $rp['semester']; ?></td>
+                                    <td><?= $bs['nama']; ?></td>
+                                    <td><?= $bs['nama_mh']; ?></td>
+                                    <td>
+                                        <?php foreach ($semester as $s) { ?>
+                                        <?php if ($s->id == $bs['semester_id']) {
+                                                    echo $s->semester;
+                                                }
+                                            } ?>
+                                    </td>
                                     <td>
                                         <a href="<?= base_url('report/laporan_pdf') ?>" class="btn btn-danger btn-circle btn-sm">
                                             <i class="fas fa-download"></i>

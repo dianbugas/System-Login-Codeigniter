@@ -65,7 +65,7 @@
                         <input type="text" class="form-control" placeholder="Perusahaan" name="perusahaan" id="perusahaan" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Alamat" name="alamat" id="alamat" />
+                        <textarea class="form-control" name="alamat" id="alamat" rows="3" placeholder="Alamat"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="input-group">

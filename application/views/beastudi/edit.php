@@ -64,12 +64,8 @@
                             <label for="menu" class="col-sm-3 col-form-label">Program Studi</label>
                             <div class="col-sm-7">
                                 <select class="form-control" name="programstudi" id="programstudi">
-                                    <?php foreach ($jurusan as $bes) : ?>
-                                        <?php if ($bes == $jurusan['programstudi']) : ?>
-                                            <option value="<?= $bes; ?>" selected><?= $bes; ?></option>
-                                        <?php else : ?>
-                                            <option value="<?= $bes; ?>"><?= $bes; ?></option>
-                                        <?php endif; ?>
+                                    <?php foreach ($programstudi as $s) : ?>
+                                        <option <?= $s->id == $bes->programstudi_id ? 'selected' : null; ?> value="<?= $s->id; ?>"><?= $s->programstudi; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <small class="form-text- text-danger"><?= form_error('programstudi'); ?></small>
@@ -79,12 +75,8 @@
                             <label for="menu" class="col-sm-3 col-form-label">Kontribusi</label>
                             <div class="col-sm-7">
                                 <select class="form-control" name="kontribusi" id="kontribusi">
-                                    <?php foreach ($kontribusi as $kon) : ?>
-                                        <?php if ($kon == $kontribusi['kontribusi']) : ?>
-                                            <option value="<?= $kon; ?>" selected><?= $kon; ?></option>
-                                        <?php else : ?>
-                                            <option value="<?= $kon; ?>"><?= $kon; ?></option>
-                                        <?php endif; ?>
+                                    <?php foreach ($kontribusi as $s) : ?>
+                                        <option <?= $s->id == $bes->kontribusi_id ? 'selected' : null; ?> value="<?= $s->id; ?>"><?= $s->kontribusi; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <small class="form-text- text-danger"><?= form_error('kontribusi'); ?></small>

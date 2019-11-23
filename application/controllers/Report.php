@@ -6,8 +6,9 @@ class Report extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Report_model');
-        $this->load->library('form_validation');
+        $this->load->model('Beastudi_model');
+        $this->load->model('Pic_model');
+        $this->load->model('Beastudi_model', 'pic');
         $this->load->helper('url');
 
 
@@ -19,7 +20,9 @@ class Report extends CI_Controller
     {
         $data['title'] = 'Report';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['report'] = $this->Report_model->getBeastudi();
+        $data['semester'] = $this->pic->getData('semester');
+        $data['beastudi'] = $this->pic->getBeastudi();
+        $data['pic'] = $this->db->get('pic')->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
