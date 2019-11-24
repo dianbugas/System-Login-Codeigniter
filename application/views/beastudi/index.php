@@ -45,9 +45,9 @@
                                 </td>
                                 <td><?= $bs['angkatan']; ?></td>
                                 <td>
-                                    <?php foreach ($programstudi_id as $k) { ?>
+                                    <?php foreach ($programstudi as $k) { ?>
                                     <?php if ($k->id == $bs['programstudi_id']) {
-                                                echo $k->programstudi_id;
+                                                echo $k->programstudi;
                                             }
                                         } ?>
                                 </td>

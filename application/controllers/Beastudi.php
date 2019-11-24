@@ -79,6 +79,7 @@ class Beastudi extends CI_Controller
         //$data['kontribusi'] = ['Content', 'Upload Content', 'Website Developer', 'Design Graphic', 'Video Content', 'LPPM', 'Inkubator', 'LPMI'];
         $data['kontribusi'] = $this->Beastudi_model->getData('kontribusi');
         $data['semester'] = $this->Beastudi_model->getData('semester');
+        $data['programstudi'] = $this->pic->getData('programstudi');
 
 
         $this->load->view('templates/header', $data);
@@ -96,7 +97,7 @@ class Beastudi extends CI_Controller
             'jk' => $this->input->post('jk'),
             'semester_id' => $this->input->post('semester'),
             'angkatan' => $this->input->post('angkatan'),
-            'programstudi' => $this->input->post('programstudi'),
+            'programstudi_id' => $this->input->post('programstudi'),
             'kontribusi_id' => $this->input->post('kontribusi'),
         ];
 

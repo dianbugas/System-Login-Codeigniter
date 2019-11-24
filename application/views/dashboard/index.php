@@ -116,8 +116,20 @@
                                         } ?>
                                 </td>
                                 <td><?= $bs['angkatan']; ?></td>
-                                <td><?= $bs['programstudi']; ?></td>
-                                <td><?= $bs['kontribusi']; ?></td>
+                                <td>
+                                    <?php foreach ($programstudi as $k) { ?>
+                                    <?php if ($k->id == $bs['programstudi_id']) {
+                                                echo $k->programstudi;
+                                            }
+                                        } ?>
+                                </td>
+                                <td>
+                                    <?php foreach ($kontribusi as $k) { ?>
+                                    <?php if ($k->id == $bs['kontribusi_id']) {
+                                                echo $k->kontribusi;
+                                            }
+                                        } ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

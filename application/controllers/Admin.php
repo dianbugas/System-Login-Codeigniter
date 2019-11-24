@@ -8,6 +8,9 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('Beastudi_model');
+
+        $this->load->model('Pic_model');
+        $this->load->model('Beastudi_model', 'pic');
         // di tendang supaya user tdk masuk sembarangan lewat url
         is_logged_in();
     }
@@ -94,13 +97,7 @@ class Admin extends CI_Controller
         //query submenu
         //model menunya di aliaskan yg diatas Menjadi Menu_model dan method getSubModel
         $data['users'] = $this->user->getAllUser();
-        //untuk topbar jika error
-        //$data['users'] = $this->db->get('user_menu')->result_array();
-
-        // $this->form_validation->set_rules('title', 'Title', 'required'); //name nya menu di index
-        // $this->form_validation->set_rules('menu_id', 'Menu', 'required');
-        // $this->form_validation->set_rules('url', 'URL', 'required');
-        // $this->form_validation->set_rules('icon', 'Icon', 'required');
+        $data['role'] = $this->pic->getData('user_role');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -129,6 +126,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $where = array('id' => $id);
         $data['users'] = $this->User_model->editdata($where, 'user')->result();
+        $data['role'] = $this->pic->getData('user_role');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

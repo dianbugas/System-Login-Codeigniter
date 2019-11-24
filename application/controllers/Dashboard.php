@@ -21,6 +21,8 @@ class Dashboard extends CI_Controller
         $data['total_pic'] = $this->Pic_model->hitungJumlahPic();
         $data['total_beastudi'] = $this->Beastudi_model->hitungJumlahBeastudi();
         $data['semester'] = $this->pic->getData('semester');
+        $data['programstudi'] = $this->pic->getData('programstudi');
+        $data['kontribusi'] = $this->pic->getData('kontribusi');
         $data['beastudi'] = $this->pic->getBeastudi();
         $data['pic'] = $this->db->get('pic')->result_array();
 

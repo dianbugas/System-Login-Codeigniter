@@ -32,7 +32,13 @@
                   <th scope="row"><?= $i++; ?></th>
                   <td><?= $us['name']; ?></td>
                   <td><?= $us['email']; ?></td>
-                  <td><?= $us['role_id']; ?></td>
+                  <td>
+                    <?php foreach ($role as $k) { ?>
+                    <?php if ($k->id == $us['role_id']) {
+                          echo $k->role;
+                        }
+                      } ?>
+                  </td>
                   <td><?= $us['is_active']; ?></td>
                   <td><?= date('d F Y', $user['date_created']); ?></td>
                   <td><img src="<?= base_url('assets/img/profile/') . $us['image']; ?>" class="img-circle" alt="..." width="40" height="40"></td>
