@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use Dompdf\Dompdf;
+use dompdf\dompdf;
 
 class Pdfgenerator
 {

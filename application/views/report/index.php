@@ -6,6 +6,9 @@
         <div class="col-lg-10">
             <div class="card-body">
                 <div class="table-responsive">
+                    <a href="<?= base_url('report/laporan_pdf') ?>" class="btn btn-danger mb-2">
+                        <i class=" fas fa-download"> Export PDF</i>
+                    </a>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -13,7 +16,6 @@
                                 <th scope="col">PIC</th>
                                 <th scope="col">Nama Mahasiswa</th>
                                 <th scope="col">Semester</th>
-                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,11 +31,6 @@
                                                     echo $s->semester;
                                                 }
                                             } ?>
-                                    </td>
-                                    <td>
-                                        <a href="<?= base_url('report/laporan_pdf') ?>" class="btn btn-danger btn-circle btn-sm">
-                                            <i class="fas fa-download"></i>
-                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
